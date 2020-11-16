@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
             this.query[i].submenu= JSON.parse(this.query[i].submenu);
            
           }
-          console.log(this.query);
+       
         },
         err => console.error(err)
       )
