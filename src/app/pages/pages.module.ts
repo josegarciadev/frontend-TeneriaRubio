@@ -19,12 +19,12 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+
 import { DepartamentosComponent } from './departamentos/departamentos.component';
 import { AggDepComponent } from './departamentos/agg-dep/agg-dep.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { AggEmpComponent } from './empleados/agg-emp/agg-emp.component';
 import { EntradaEmpComponent } from './entrada-emp/entrada-emp.component';
-import { AggEntEmpComponent } from './entradaEmp/agg-ent-emp/agg-ent-emp.component';
 import { EntradaLineaComponent } from './entrada-linea/entrada-linea.component';
 import { AggEntLineaComponent } from './entrada-linea/agg-ent-linea/agg-ent-linea.component';
 import { LineaComponent } from './linea/linea.component';
@@ -43,6 +43,9 @@ import { SalidaLineaComponent } from './salida-linea/salida-linea.component';
 import { AggSalLineaComponent } from './salidaLinea/agg-sal-linea/agg-sal-linea.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { AggUsuarioComponent } from './usuario/agg-usuario/agg-usuario.component';
+import { AggEntEmpComponent } from './entrada-emp/agg-ent-emp/agg-ent-emp.component';
+import { RecursoshComponent } from './auditorias/recursosh/recursosh.component';
+import { AlmacenComponent } from './auditorias/almacen/almacen.component';
 
 @NgModule({
     declarations: [
@@ -60,7 +63,6 @@ import { AggUsuarioComponent } from './usuario/agg-usuario/agg-usuario.component
         EmpleadosComponent,
         AggEmpComponent,
         EntradaEmpComponent,
-        AggEntEmpComponent,
         EntradaLineaComponent,
         AggEntLineaComponent,
         LineaComponent,
@@ -79,6 +81,9 @@ import { AggUsuarioComponent } from './usuario/agg-usuario/agg-usuario.component
         AggSalLineaComponent,
         UsuarioComponent,
         AggUsuarioComponent,
+        AggEntEmpComponent,
+        RecursoshComponent,
+        AlmacenComponent
     ],
     exports: [
         PagesComponent,
