@@ -19,6 +19,30 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { DepartamentosComponent } from './departamentos/departamentos.component';
+import { AggDepComponent } from './departamentos/agg-dep/agg-dep.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
+import { AggEmpComponent } from './empleados/agg-emp/agg-emp.component';
+import { EntradaEmpComponent } from './entrada-emp/entrada-emp.component';
+import { AggEntEmpComponent } from './entradaEmp/agg-ent-emp/agg-ent-emp.component';
+import { EntradaLineaComponent } from './entrada-linea/entrada-linea.component';
+import { AggEntLineaComponent } from './entrada-linea/agg-ent-linea/agg-ent-linea.component';
+import { LineaComponent } from './linea/linea.component';
+import { AggLineaComponent } from './linea/agg-linea/agg-linea.component';
+import { LineaProdComponent } from './linea-prod/linea-prod.component';
+import { AggLineaProdComponent } from './linea/agg-linea-prod/agg-linea-prod.component';
+import { ProductoComponent } from './producto/producto.component';
+import { AggProductoComponent } from './producto/agg-producto/agg-producto.component';
+import { ProdprovComponent } from './prodprov/prodprov.component';
+import { AggProdprovComponent } from './prodprov/agg-prodprov/agg-prodprov.component';
+import { ProveedorComponent } from './proveedor/proveedor.component';
+import { AggProveedorComponent } from './proveedor/agg-proveedor/agg-proveedor.component';
+import { SalidaEmpComponent } from './salida-emp/salida-emp.component';
+import { AggSalEmpComponent } from './salidaEmp/agg-sal-emp/agg-sal-emp.component';
+import { SalidaLineaComponent } from './salida-linea/salida-linea.component';
+import { AggSalLineaComponent } from './salidaLinea/agg-sal-linea/agg-sal-linea.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { AggUsuarioComponent } from './usuario/agg-usuario/agg-usuario.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +55,30 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         AccoutSettingsComponent,
         PromesasComponent,
         RxjsComponent,
+        DepartamentosComponent,
+        AggDepComponent,
+        EmpleadosComponent,
+        AggEmpComponent,
+        EntradaEmpComponent,
+        AggEntEmpComponent,
+        EntradaLineaComponent,
+        AggEntLineaComponent,
+        LineaComponent,
+        AggLineaComponent,
+        LineaProdComponent,
+        AggLineaProdComponent,
+        ProductoComponent,
+        AggProductoComponent,
+        ProdprovComponent,
+        AggProdprovComponent,
+        ProveedorComponent,
+        AggProveedorComponent,
+        SalidaEmpComponent,
+        AggSalEmpComponent,
+        SalidaLineaComponent,
+        AggSalLineaComponent,
+        UsuarioComponent,
+        AggUsuarioComponent,
     ],
     exports: [
         PagesComponent,
