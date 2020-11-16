@@ -6,6 +6,7 @@ import { SettingsService } from './settings/settings.service';
 import { SharedService } from './shared/shared.service';
 import { SidebarService } from './shared/sidebar.service';
 import {DepartamentosService} from './pages/departamentos.service';
+import {EmpleadosService} from './pages/empleados.service';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {DepartamentosService} from './pages/departamentos.service';
     SettingsService,
     SharedService,
     SidebarService,
-    DepartamentosService
+    DepartamentosService,
+    EmpleadosService
   ]
 })
 export class ServiceModule { }

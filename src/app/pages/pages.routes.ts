@@ -49,9 +49,11 @@ const pagesRoutes: Routes = [
             // tslint:disable-next-line: max-line-length
             // Rutas Principales
             {path: 'addDepartamentos', component: AggDepComponent, data:{titulo: 'Form Dep', content: 'Departamentos'}},
+            {path: 'editDepartamentos/:id', component: AggDepComponent, data:{titulo: 'Form Dep', content: 'Departamentos'}},
             {path: 'departamentos', component: DepartamentosComponent, data:{titulo: 'Ver Dep', content: 'Ver Departamentos'}},
             //Empleados
             {path: 'addEmpleados', component: AggEmpComponent, data:{titulo: 'Form Emp', content: 'Empleados'}},
+            {path: 'editEmpleados/:id', component: AggEmpComponent, data:{titulo: 'Form Emp', content: 'Empleados'}},
             {path: 'empleados', component: EmpleadosComponent, data:{titulo: 'Ver Dep', content: 'Ver Empleados'}},
             //Entradas
             {path: 'addEntEmpl', component: AggEntEmpComponent, data:{titulo: 'Form entEmp', content: 'Entrada Empleados'}},
