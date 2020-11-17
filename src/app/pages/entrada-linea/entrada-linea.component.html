@@ -1,1 +1,43 @@
-<p>entrada-linea works!</p>
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Entrada linea</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th># Orden</th>
+                                <th>Linea</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Cantidad</th>
+                                <th>Empleado</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let entLinea of query'>
+                                <td>{{entLinea.nro_orden}}</td>
+                                <td>{{entLinea.nombre_linea}}</td>
+                                <td>{{entLinea.nombre_producto+' | '+entLinea.nombre_proveedor}} </td>
+                                <td>{{entLinea.fecha | date}}</td>
+                                <td>{{entLinea.nombres}}</td>
+                                <td>{{entLinea.existencia}}</td>
+                                <td><a class="pointer" routerLink="/editEntLinea/{{entLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteEntLinea(entLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

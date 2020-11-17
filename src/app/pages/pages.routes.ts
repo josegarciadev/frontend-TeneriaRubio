@@ -59,6 +59,7 @@ const pagesRoutes: Routes = [
             {path: 'addEntEmpl', component: AggEntEmpComponent, data:{titulo: 'Form entEmp', content: 'Entrada Empleados'}},
             {path: 'entradaEmpleado', component: EntradaEmpComponent, data:{titulo: 'Ver entEmp', content: 'Ver Entrada Empleados'}},
             {path: 'addEntLinea', component: AggEntLineaComponent, data:{titulo: 'Form entLinea', content: 'Entrada Linea'}},
+            {path: 'editEntLinea/:id', component: AggEntLineaComponent, data:{titulo: 'Form entLinea', content: 'Entrada Linea'}},
             {path: 'entradaLinea', component: EntradaLineaComponent, data:{titulo: 'Ver entLinea', content: 'Ver Entrada Linea'}},
             //Salidas
             {path: 'addSalEmpl', component: AggSalEmpComponent, data:{titulo: 'Form SalEmp', content: 'Salida Empleados'}},
@@ -71,6 +72,7 @@ const pagesRoutes: Routes = [
             {path: 'linea', component: LineaComponent, data:{titulo: 'Ver Linea', content: 'Ver Linea'}},
              // Linea Productos
              {path: 'addLineaProd', component: AggLineaProdComponent, data:{titulo: 'Form LineaProducto', content: 'LineaProducto'}},
+             {path: 'editLineaProd/:id', component: AggLineaProdComponent, data:{titulo: 'Form LineaProducto', content: 'LineaProducto'}},
              {path: 'lineaProd', component: LineaProdComponent, data:{titulo: 'Ver LineaProducto', content: 'Ver LineaProducto'}},
               //  Productos
               {path: 'addProd', component: AggProductoComponent, data:{titulo: 'Form Producto', content: 'Producto'}},

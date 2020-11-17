@@ -40,8 +40,10 @@ export class AggLineaComponent implements OnInit {
       );
   }
 
-  saveDep(){
+  saveLinea(){
     delete this.linea.id_linea;
+    delete this.linea.nombre_departamento;
+    delete this.linea.descripcion_dep;
 
     this.lineaService.createLinea(this.linea)
     .subscribe(
@@ -64,7 +66,10 @@ export class AggLineaComponent implements OnInit {
       );
   }
 
-  updateDep(){
+  updateLinea(){
+    delete this.linea.nombre_departamento;
+    delete this.linea.descripcion_dep; 
+
     this.lineaService.updateLinea(this.linea.id_linea, this.linea)
       .subscribe(
         res =>{

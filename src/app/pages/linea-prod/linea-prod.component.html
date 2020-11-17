@@ -1,1 +1,39 @@
-<p>linea-prod works!</p>
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Linea Producto</h4>
+                <h6 class="card-subtitle">Todos los campos con <code>*</code> son obligatorios</h6>
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Linea</th>
+                                <th>Producto</th>
+                                <th>Existencia</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let lineaprod of query'>
+                                <td>{{lineaprod.id_lineaprod}}</td>
+                                <td>{{lineaprod.nombre_linea}}</td>
+                                <td>{{lineaprod.nombre_producto+' | '+lineaprod.nombre_proveedor}} </td>
+                                <td>{{lineaprod.existencia}}</td>
+                                <td><a class="pointer" routerLink="/editLineaProd/{{lineaprod.id_lineaprod}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteLineaprod(lineaprod.id_lineaprod)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

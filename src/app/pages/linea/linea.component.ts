@@ -25,7 +25,7 @@ export class LineaComponent implements OnInit {
       );
   }
 
-  deleteDep(id:number | string){
+  deleteLinea(id:number | string){
     this.lineaService.deleteLinea(id)
           .subscribe(
             res=>{

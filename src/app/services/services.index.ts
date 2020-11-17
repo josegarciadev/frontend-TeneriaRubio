@@ -8,3 +8,5 @@ export {ProveedorService} from './pages/proveedor.service';
 export {ProductoService} from './pages/producto.service';
 export {ProdproveeService} from './pages/prodprovee.service';
 export {LineaService} from './pages/linea.service';
+export {LineaProdService} from './pages/lineaprod.service';
+export {EntradalineaService} from './pages/entradalinea.service';
