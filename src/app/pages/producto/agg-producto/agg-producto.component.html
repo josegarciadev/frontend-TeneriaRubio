@@ -1,0 +1,56 @@
+ <!-- Row -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Producto</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Informacion del producto</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Codigo</label>
+                                    <input type="text" name="codigo_producto" class="form-control" placeholder="#######" [(ngModel)]="producto.codigo_producto">
+                                    <small class="form-control-feedback"> Ingrese el codigo del producto</small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="textarea" name="nombre_producto" class="form-control form-control-danger" placeholder="nombre del producto" [(ngModel)]="producto.nombre_producto">
+                                    <small class="form-control-feedback"> Ingrese el nombre del producto </small> </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row p-t-20">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Unidad de Medida</label>
+                                    <select class="form-control custom-select" name="unidad_medida" [(ngModel)]="producto.unidad_medida">
+                                        <option selected value="null">Seleccionar</option>
+                                        <option value="GL">Galón</option>
+                                        <option value="JG">Juego</option>
+                                        <option value="KL">Kilo</option>
+                                        <option value="MT">Metro</option>
+                                        <option value="UN">Unidad</option>
+                                    </select>
+                                    
+                                    <small class="form-control-feedback"> Ingrese la unidad de medida</small> </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateDep():saveDep()'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->

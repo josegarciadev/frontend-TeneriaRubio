@@ -1,0 +1,48 @@
+ <!-- Row -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Producto Proveedor</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Informacion para vincular el producto proveedor</h3>
+                        <hr>
+                       
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Producto</label>
+                                    <select class="form-control custom-select" name="id_producto" [(ngModel)]="prodprov.id_producto">
+                                        <option selected value="null">Seleccionar</option>
+                                        <option *ngFor='let pro of prod' [value]="pro.id_producto">{{pro.nombre_producto}}</option>
+                                        
+                                    </select>
+                                    
+                                    <small class="form-control-feedback"> Seleccione un producto</small> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Proveedor</label>
+                                    <select class="form-control custom-select" name="id_proveedor" [(ngModel)]="prodprov.id_proveedor">
+                                        <option selected value="null">Seleccionar</option>
+                                        <option *ngFor='let prove of prov' [value]="prove.id_proveedor">{{prove.nombre_proveedor}}</option>
+                                    </select>
+                                    
+                                    <small class="form-control-feedback"> Seleccione el Proveedor</small> </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateProdprov():saveProdprov()'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->

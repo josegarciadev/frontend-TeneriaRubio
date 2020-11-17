@@ -1,0 +1,37 @@
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Proveedor</h4>
+                <h6 class="card-subtitle">Todos los campos con <code>*</code> son obligatorios</h6>
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let prov of query'>
+                                <td>{{prov.id_proveedor}}</td>
+                                <td>{{prov.nombre_proveedor}}</td>
+                                <td>{{prov.descripcion_prov}}</td>
+                                <td><a class="pointer" routerLink="/editProveedor/{{prov.id_proveedor}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteProv(prov.id_proveedor)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

@@ -1,0 +1,41 @@
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Empleados</h4>
+                <h6 class="card-subtitle">Todos los campos con <code>*</code> son obligatorios</h6>
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Departamento</th>
+                                <th>Ver más</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let emp of query'>
+                                <td>{{emp.id_empleado}}</td>
+                                <td>{{emp.cedula}}</td>
+                                <td>{{emp.nombres}}</td>
+                                <td>{{emp.nombre_departamento}}</td>
+                                <td>imagen</td>
+                                <td><a class="pointer" routerLink="/editEmpleados/{{emp.id_empleado}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteEmp(emp.id_empleado)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

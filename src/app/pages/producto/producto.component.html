@@ -1,0 +1,39 @@
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Productos</h4>
+                <h6 class="card-subtitle">Todos los campos con <code>*</code> son obligatorios</h6>
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Unidad de Medida</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let prod of query'>
+                                <td>{{prod.id_producto}}</td>
+                                <td>{{prod.codigo_producto}}</td>
+                                <td>{{prod.nombre_producto}}</td>
+                                <td>{{prod.unidad_medida}}</td>
+                                <td><a class="pointer" routerLink="/editProducto/{{prod.id_producto}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteProd(prod.id_producto)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

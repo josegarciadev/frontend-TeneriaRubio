@@ -3,3 +3,8 @@ export { SidebarService } from './shared/sidebar.service';
 export { SharedService } from './shared/shared.service';
 export {DepartamentosService} from './pages/departamentos.service';
 export {EmpleadosService} from './pages/empleados.service';
+export {UsuarioService} from './pages/usuario.service';
+export {ProveedorService} from './pages/proveedor.service';
+export {ProductoService} from './pages/producto.service';
+export {ProdproveeService} from './pages/prodprovee.service';
+export {LineaService} from './pages/linea.service';

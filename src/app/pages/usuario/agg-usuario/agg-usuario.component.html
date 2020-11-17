@@ -1,0 +1,111 @@
+ <!-- Row -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Usuarios</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Usuario Informacion</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cedula</label>
+                                    <input type="text"  class="form-control" placeholder="111111111" name="cedula" [(ngModel)]='usuario.cedula'>
+                                    <small class="form-control-feedback"> Solo Numeros </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label">Nombres</label>
+                                    <input type="text" class="form-control form-control-danger" placeholder="Pedro" name="nombres" [(ngModel)]='usuario.nombre'>
+                                    <small class="form-control-feedback"> Ingreses su nombre completo </small> </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Apellidos</label>
+                                    <input type="text"  class="form-control" placeholder="Perez " name="apellidos" [(ngModel)]='usuario.apellido'>
+                                    <small class="form-control-feedback"> Ingrese sus apellidos </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label">Telefono</label>
+                                    <input type="text"  class="form-control form-control-danger" placeholder="99999999999" name="telefono" [(ngModel)]='usuario.telefono'>
+                                    <small class="form-control-feedback"> Ingrese su numero telefonico </small> </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Correo electronico</label>
+                                    <input type="email"  class="form-control" placeholder="ejemplo@ejemplo.com" name="correo_elect" [(ngModel)]='usuario.correo_elec'>
+                                    <small class="form-control-feedback"> Ingrese un correo electronico valido </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label">Dirección</label>
+                                    <input type="textarea"  class="form-control form-control-danger"  name="direccion" [(ngModel)]='usuario.direccion'>
+                                    <small class="form-control-feedback"> Ingrese su dirección actual</small> </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-success">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control custom-select" name="status" [(ngModel)]='usuario.status'>
+                                        <option selected value="null">Seleccionar</option>
+                                        <option value="A">Activo</option>
+                                        <option value="I">Inactivo</option>
+                                    </select>
+                                    <small class="form-control-feedback"> Selecione su Status </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Foto</label>
+                                    <input type="text" class="form-control"  name="foto" [(ngModel)]="usuario.foto" >
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Usuario</label>
+                                    <input class="form-control" type='text' name="user" [(ngModel)]='usuario.user'>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Contraseña</label>
+                                    <input class="form-control" type='password' name="pass" [(ngModel)]='usuario.pass'>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        
+                       
+                    </div>
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateUser():saveUser()'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->

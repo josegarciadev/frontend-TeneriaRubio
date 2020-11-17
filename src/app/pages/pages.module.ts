@@ -31,7 +31,7 @@ import { AggEntLineaComponent } from './entrada-linea/agg-ent-linea/agg-ent-line
 import { LineaComponent } from './linea/linea.component';
 import { AggLineaComponent } from './linea/agg-linea/agg-linea.component';
 import { LineaProdComponent } from './linea-prod/linea-prod.component';
-import { AggLineaProdComponent } from './linea/agg-linea-prod/agg-linea-prod.component';
+import { AggLineaProdComponent } from './linea-prod/agg-linea-prod/agg-linea-prod.component';
 import { ProductoComponent } from './producto/producto.component';
 import { AggProductoComponent } from './producto/agg-producto/agg-producto.component';
 import { ProdprovComponent } from './prodprov/prodprov.component';

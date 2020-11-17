@@ -20,7 +20,7 @@ import { AggEntLineaComponent } from './entrada-linea/agg-ent-linea/agg-ent-line
 import { LineaComponent } from './linea/linea.component';
 import { AggLineaComponent } from './linea/agg-linea/agg-linea.component';
 import { LineaProdComponent } from './linea-prod/linea-prod.component';
-import { AggLineaProdComponent } from './linea/agg-linea-prod/agg-linea-prod.component';
+import { AggLineaProdComponent } from './linea-prod/agg-linea-prod/agg-linea-prod.component';
 import { ProductoComponent } from './producto/producto.component';
 import { AggProductoComponent } from './producto/agg-producto/agg-producto.component';
 import { ProdprovComponent } from './prodprov/prodprov.component';
@@ -67,21 +67,26 @@ const pagesRoutes: Routes = [
             {path: 'salidaLinea', component: SalidaLineaComponent, data:{titulo: 'Ver salLinea', content: 'Ver Salida Linea'}},
             //Linea
             {path: 'addlinea', component: AggLineaComponent, data:{titulo: 'Form Linea', content: 'Linea'}},
+            {path: 'editLinea/:id', component: AggLineaComponent, data:{titulo: 'Form Linea', content: 'Linea'}},
             {path: 'linea', component: LineaComponent, data:{titulo: 'Ver Linea', content: 'Ver Linea'}},
              // Linea Productos
              {path: 'addLineaProd', component: AggLineaProdComponent, data:{titulo: 'Form LineaProducto', content: 'LineaProducto'}},
              {path: 'lineaProd', component: LineaProdComponent, data:{titulo: 'Ver LineaProducto', content: 'Ver LineaProducto'}},
               //  Productos
               {path: 'addProd', component: AggProductoComponent, data:{titulo: 'Form Producto', content: 'Producto'}},
+              {path: 'editProducto/:id', component: AggProductoComponent, data:{titulo: 'Form Producto', content: 'Producto'}},
               {path: 'productos', component: ProductoComponent, data:{titulo: 'Ver Producto', content: 'Ver Producto'}},
               //  Productos Proveedor
               {path: 'addprodprovee', component: AggProdprovComponent, data:{titulo: 'Form ProductoProveedor', content: 'ProductoProveedor'}},
+              {path: 'editProdprov/:id', component: AggProdprovComponent, data:{titulo: 'Form ProductoProveedor', content: 'ProductoProveedor'}},
               {path: 'prodprovee', component: ProdprovComponent, data:{titulo: 'Ver ProductoProveedor', content: 'Ver ProductoProveedor'}},
               // Proveedor
               {path: 'addproveedor', component: AggProveedorComponent, data:{titulo: 'Form Proveedor', content: 'Proveedor'}},
+              {path: 'editProveedor/:id', component: AggProveedorComponent, data:{titulo: 'Form Proveedor', content: 'Proveedor'}},
               {path: 'proveedor', component: ProveedorComponent, data:{titulo: 'Ver Proveedor', content: 'Ver Proveedor'}},
               // Usuarios
               {path: 'adduser', component: AggUsuarioComponent, data:{titulo: 'Form Usuarios', content: 'Usuarios'}},
+              {path: 'editUsuarios/:id', component: AggUsuarioComponent, data:{titulo: 'Form Usuarios', content: 'Usuarios'}},
               {path: 'usuarios', component: UsuarioComponent, data:{titulo: 'Ver Usuarios', content: 'Ver Usuarios'}},
               // Auditorias
               {path: 'auditoriasrh', component: RecursoshComponent, data:{titulo: 'Ver Recursos Humanos', content: 'Recursos Humanos'}},
