@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {EntradalineaService} from '../../../services/services.index';
 import {EmpleadosService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
+import {EntradaLinea} from '../../../Models/entradaLinea';
 import {Router,ActivatedRoute}  from '@angular/router';
 @Component({
   selector: 'app-agg-ent-linea',
@@ -16,7 +17,15 @@ export class AggEntLineaComponent implements OnInit {
     fecha:new Date,
     cantidad:0,
     id_empleado:0
-  }
+  };
+  public enviar:EntradaLinea={
+    nro_orden:'',
+    id_linea:0,
+    id_lineaprod:0,
+    fecha:new Date,
+    cantidad:0,
+    id_empleado:0
+  };
   public estado :boolean=false;
   public query1:any=[];
   public query2:any =[];
@@ -70,15 +79,14 @@ getListProdprov(id:any){
 }
 
 saveEntLinea(){
-  delete this.entradaLinea.id_producto;
-  delete this.entradaLinea.id_proveedor;
-  delete this.entradaLinea.codigo_producto;
-  delete this.entradaLinea.nombre_producto;
-  delete this.entradaLinea.unidad_medida;
-  delete this.entradaLinea.nombre_proveedor;
-  delete this.entradaLinea.descripcion_prov;
+  this.enviar.nro_orden= this.entradaLinea.nro_orden;
+  this.enviar.id_linea= this.entradaLinea.id_linea;
+  this.enviar.id_lineaprod= this.entradaLinea.id_lineaprod;
+  this.enviar.fecha= this.entradaLinea.fecha;
+  this.enviar.cantidad= this.entradaLinea.cantidad;
+  this.enviar.id_empleado= this.entradaLinea.id_empleado;
   
-  this.entradalineaService.createEntLinea(this.entradaLinea)
+  this.entradalineaService.createEntLinea(this.enviar)
   .subscribe(
     res=>{
       this.router.navigate(['/entradaLinea']);
@@ -96,24 +104,25 @@ getOne(id:number | string){
         this.entradaLinea=res;
         let id = this.entradaLinea.id_linea;
          this.getListProdprov(id);
-        console.log(this.entradaLinea);
+        
       },
       err=>console.error(err)
     );
 }
 
 updateEntLinea(){
-  delete this.entradaLinea.id_producto;
-  delete this.entradaLinea.id_proveedor;
-  delete this.entradaLinea.codigo_producto;
-  delete this.entradaLinea.nombre_producto;
-  delete this.entradaLinea.unidad_medida;
-  delete this.entradaLinea.nombre_proveedor;
-  delete this.entradaLinea.descripcion_prov;
+
+  this.enviar.nro_orden= this.entradaLinea.nro_orden;
+  this.enviar.id_linea= this.entradaLinea.id_linea;
+  this.enviar.id_lineaprod= this.entradaLinea.id_lineaprod;
+  this.enviar.fecha= this.entradaLinea.fecha;
+  this.enviar.cantidad= this.entradaLinea.cantidad;
+  this.enviar.id_empleado= this.entradaLinea.id_empleado;
   
+  console.log(this.enviar);
   
-  console.log(this.entradaLinea);
-  this.entradalineaService.updateEntLinea(this.entradaLinea.nro_orden, this.entradaLinea)
+ 
+  this.entradalineaService.updateEntLinea(this.enviar.nro_orden, this.enviar)
     .subscribe(
       res =>{
         console.log(res);

@@ -9,4 +9,7 @@ export {ProductoService} from './pages/producto.service';
 export {ProdproveeService} from './pages/prodprovee.service';
 export {LineaService} from './pages/linea.service';
 export {LineaProdService} from './pages/lineaprod.service';
+export {EntradaempleadosService} from './pages/entradaempleados.service';
 export {EntradalineaService} from './pages/entradalinea.service';
+export {SalidalineaService} from './pages/salidalinea.service';
+export {SalidaempleadoService} from './pages/salidaempleado.service';

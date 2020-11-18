@@ -7,12 +7,15 @@ import { SharedService } from './shared/shared.service';
 import { SidebarService } from './shared/sidebar.service';
 import {DepartamentosService} from './pages/departamentos.service';
 import {EmpleadosService} from './pages/empleados.service';
+import {EntradaempleadosService} from './pages/entradaempleados.service';
 import {EntradalineaService} from './pages/entradalinea.service';
 import {UsuarioService} from './pages/usuario.service';
 import {LineaService} from './pages/linea.service';
 import {LineaProdService} from './pages/lineaprod.service';
 import {ProductoService} from './pages/producto.service';
 import {ProveedorService} from './pages/proveedor.service';
+import {SalidalineaService} from './pages/salidalinea.service';
+import {SalidaempleadoService} from './pages/salidaempleado.service';
 import {ProdproveeService} from './pages/prodprovee.service';
 
 
@@ -29,6 +32,7 @@ import {ProdproveeService} from './pages/prodprovee.service';
     SharedService,
     SidebarService,
     DepartamentosService,
+    EntradaempleadosService,
     EmpleadosService,
     EntradalineaService,
     UsuarioService,
@@ -36,6 +40,8 @@ import {ProdproveeService} from './pages/prodprovee.service';
     LineaProdService,
     ProveedorService,
     ProductoService,
+    SalidalineaService,
+    SalidaempleadoService,
     ProdproveeService
   ]
 })

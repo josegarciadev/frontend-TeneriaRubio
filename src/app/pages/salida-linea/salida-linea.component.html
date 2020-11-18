@@ -1,1 +1,43 @@
-<p>salida-linea works!</p>
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Salida de linea</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th># Orden</th>
+                                <th>Linea</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Cantidad</th>
+                                <th>Empleado</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let salLinea of query'>
+                                <td>{{salLinea.nro_orden}}</td>
+                                <td>{{salLinea.nombre_linea}}</td>
+                                <td>{{salLinea.nombre_producto+' | '+salLinea.nombre_proveedor}} </td>
+                                <td>{{salLinea.fecha | date}}</td>
+                                <td>{{salLinea.cantidad}}</td>
+                                <td>{{salLinea.nombres}}</td>
+                                <td><a class="pointer" routerLink="/editSalLinea/{{salLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteSalLinea(salLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

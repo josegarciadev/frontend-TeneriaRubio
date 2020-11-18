@@ -25,8 +25,8 @@
                                 <td>{{entLinea.nombre_linea}}</td>
                                 <td>{{entLinea.nombre_producto+' | '+entLinea.nombre_proveedor}} </td>
                                 <td>{{entLinea.fecha | date}}</td>
+                                <td>{{entLinea.cantidad}}</td>
                                 <td>{{entLinea.nombres}}</td>
-                                <td>{{entLinea.existencia}}</td>
                                 <td><a class="pointer" routerLink="/editEntLinea/{{entLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
                                 <td><a class="pointer" (click)='deleteEntLinea(entLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
                                 

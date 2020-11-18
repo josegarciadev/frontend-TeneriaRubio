@@ -57,14 +57,17 @@ const pagesRoutes: Routes = [
             {path: 'empleados', component: EmpleadosComponent, data:{titulo: 'Ver Dep', content: 'Ver Empleados'}},
             //Entradas
             {path: 'addEntEmpl', component: AggEntEmpComponent, data:{titulo: 'Form entEmp', content: 'Entrada Empleados'}},
+            {path: 'editEntEmpleados/:id', component: AggEntEmpComponent, data:{titulo: 'Form entEmp', content: 'Entrada Empleados'}},
             {path: 'entradaEmpleado', component: EntradaEmpComponent, data:{titulo: 'Ver entEmp', content: 'Ver Entrada Empleados'}},
             {path: 'addEntLinea', component: AggEntLineaComponent, data:{titulo: 'Form entLinea', content: 'Entrada Linea'}},
             {path: 'editEntLinea/:id', component: AggEntLineaComponent, data:{titulo: 'Form entLinea', content: 'Entrada Linea'}},
             {path: 'entradaLinea', component: EntradaLineaComponent, data:{titulo: 'Ver entLinea', content: 'Ver Entrada Linea'}},
             //Salidas
             {path: 'addSalEmpl', component: AggSalEmpComponent, data:{titulo: 'Form SalEmp', content: 'Salida Empleados'}},
+            {path: 'editSalEmpleados/:id', component: AggSalEmpComponent, data:{titulo: 'Form SalEmp', content: 'Salida Empleados'}},
             {path: 'salidaEmpleado', component: SalidaEmpComponent, data:{titulo: 'Ver SalEmp', content: 'Ver Salida Empleados'}},
             {path: 'addSalLinea', component: AggSalLineaComponent, data:{titulo: 'Form salLinea', content: 'Salida Linea'}},
+            {path: 'editSalLinea/:id', component: AggSalLineaComponent, data:{titulo: 'Form salLinea', content: 'Salida Linea'}},
             {path: 'salidaLinea', component: SalidaLineaComponent, data:{titulo: 'Ver salLinea', content: 'Ver Salida Linea'}},
             //Linea
             {path: 'addlinea', component: AggLineaComponent, data:{titulo: 'Form Linea', content: 'Linea'}},

@@ -1,4 +1,4 @@
-export interface EntradaLinea{
+export interface SalidaLinea{
     nro_orden?:number | string;
     id_linea?:number | string;
     id_lineaprod?:number | string;

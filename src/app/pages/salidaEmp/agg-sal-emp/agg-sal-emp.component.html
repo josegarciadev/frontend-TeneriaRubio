@@ -1,1 +1,44 @@
-<p>agg-sal-emp works!</p>
+ <!-- Row -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Salida de Empleados</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Salida de Empleado Informacion</h3>
+                        <hr>
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Empleado</label>
+                                    <select class="form-control custom-select" name="id_empleado" [(ngModel)]='empleado.id_empleado'>
+                                        <option selected=true value="null">Seleccionar</option>
+                                        <option *ngFor='let emp of query' [value]="emp.id_empleado">{{emp.nombres}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Descripción</label>
+                                    <input class="form-control" type='textarea' name="descripcion" [(ngModel)]='empleado.descripcion'>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
+                    <div class="form-actions text-center">
+                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateSalEmp():saveSalEmp()'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
