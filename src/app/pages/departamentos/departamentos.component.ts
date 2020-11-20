@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DepartamentosService} from '../../services/services.index';
 import {Router} from '@angular/router';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-departamentos',
   templateUrl: './departamentos.component.html',
@@ -26,14 +27,20 @@ export class DepartamentosComponent implements OnInit {
   }
 
   deleteDep(id:number | string){
-    this.departamentosServices.deleteDep(id)
+    swal("Eliminar","¿Esta seguro de eliminar el Departamento?",'warning')
+      .then((value) => {
+        this.departamentosServices.deleteDep(id)
           .subscribe(
             res=>{
               console.log(res);
+              swal('El departamento fue eliminado con exito!');
               this.getList();
             },
             err=>console.error(err)
           );
+        
+      });
+    
   }
 }
 

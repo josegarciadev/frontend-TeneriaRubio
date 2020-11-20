@@ -4,16 +4,16 @@
 <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">
     <div class="login-box card">
         <div class="card-body">
-            <form class="form-horizontal form-material" (ngSubmit)="ingresar()">
-                <a href="javascript:void(0)" class="text-center db"><img src="assets/images/logo-icon.png" alt="Home" /><br/><img src="assets/images/logo-text.png" alt="Home" /></a>
+            <form  class="form-horizontal form-material" >
+                <a href="javascript:void(0)" class="text-center db"><img src="assets/images/icono.jpg" alt="Home" /><br/><img src="assets/images/logo-text.jpg" alt="Home" /></a>
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" placeholder="Usuario">
+                        <input class="form-control" name="user" [(ngModel)]='usuario.user' type="text" placeholder="Usuario">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="password" placeholder="Contraseña">
+                        <input class="form-control" name="passw" [(ngModel)]='usuario.pass' type="password" placeholder="Contraseña">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
-                        <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="submit">Iniciar sesión</button>
+                        <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="submit" (click)='ingresar()'>Iniciar sesión</button>
                     </div>
                 </div>
                 <div class="row">

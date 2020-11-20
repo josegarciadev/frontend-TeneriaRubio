@@ -28,5 +28,9 @@ export class SidebarComponent implements OnInit {
         err => console.error(err)
       )
   }
+  cerrar(){
+    localStorage.removeItem('usuario');
+    console.log('se ejecuta el cerrar');
+  }
 
 }

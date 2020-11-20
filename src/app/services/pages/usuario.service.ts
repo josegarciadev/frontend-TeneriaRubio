@@ -13,6 +13,9 @@ export class UsuarioService {
   getUser(){
     return this.http.get(`${this.API_URL}/usuarios`);
   }
+  login(user:Usuario){
+    return this.http.post(`${this.API_URL}/usuarios/login/`,user);
+  }
 
   getOneUser(id:number | string){
     return this.http.get(`${this.API_URL}/usuarios/${id}`);
