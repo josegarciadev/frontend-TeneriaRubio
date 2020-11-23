@@ -13,4 +13,8 @@ export class SidebarService {
   public listMenu(){
     return this.http.get(`${this.API_URL}/menu`);
   }
+
+  public getMenu(id:number){
+    return this.http.get(`${this.API_URL}/usuarios/menu/${id}`);
+  }
 }

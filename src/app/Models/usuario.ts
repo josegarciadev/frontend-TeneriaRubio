@@ -11,4 +11,7 @@ export interface Usuario{
     direccion?:string;
     status?:string;
     foto?:string;
+    rol?:number|string;
+    id_user?:number | string;
+    nombre_user?: string;
 }

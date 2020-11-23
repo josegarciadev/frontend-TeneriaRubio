@@ -17,7 +17,8 @@ import {ProveedorService} from './pages/proveedor.service';
 import {SalidalineaService} from './pages/salidalinea.service';
 import {SalidaempleadoService} from './pages/salidaempleado.service';
 import {ProdproveeService} from './pages/prodprovee.service';
-
+import {AuditoriasAlmacenService} from './pages/auditoriasAlmacen.service';
+import {AuditoriasRecursosHService} from './pages/auditoriasRecursosh.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import {ProdproveeService} from './pages/prodprovee.service';
     ProductoService,
     SalidalineaService,
     SalidaempleadoService,
-    ProdproveeService
+    ProdproveeService,
+    AuditoriasAlmacenService,
+    AuditoriasRecursosHService
   ]
 })
 export class ServiceModule { }

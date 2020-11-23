@@ -3,6 +3,8 @@ import {EmpleadosService} from '../../../services/services.index';
 import {DepartamentosService} from '../../../services/services.index';
 import {Empleados} from '../../../Models/empleados';
 import {Router,ActivatedRoute}  from '@angular/router';
+import swal from 'sweetalert';
+
 @Component({
   selector: 'app-agg-emp',
   templateUrl: './agg-emp.component.html',
@@ -19,8 +21,11 @@ export class AggEmpComponent implements OnInit {
       direccion:'',
       telefono:'',
       id_departamento:0,
-      nombre_departamento:''
+      nombre_departamento:'',
+      id_user:0,
+      nombre_user:''
     }
+    public user:any ;
     public estado :boolean=false;
     public query:any=[];
   constructor(private empleadosServices: EmpleadosService,private router:Router, private departamentosServices:DepartamentosService,
@@ -28,6 +33,7 @@ export class AggEmpComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.user= JSON.parse(localStorage.getItem('usuario'));
     const params=this.activatedRouter.snapshot.params.id;
     if(params){
       this.getOne(params);
@@ -35,18 +41,28 @@ export class AggEmpComponent implements OnInit {
     }
   }
   saveEmp(){
-    delete this.empleado.id_empleado;
-    delete this.empleado.nombre_departamento;
-    delete this.empleado.descripcion_dep;
-    console.log(this.empleado);
-    this.empleadosServices.createEmp(this.empleado)
-    .subscribe(
-      res=>{
-        this.router.navigate(['/empleados']);
-      },
-      err=> console.error(err)
-    );
+    swal("¿Esta seguro de crear la entrada de linea?")
+    .then((value) => {
+      delete this.empleado.id_empleado;
+      delete this.empleado.nombre_departamento;
+      delete this.empleado.descripcion_dep;
+  
+      this.empleado.id_user = this.user.id_usuario;
+      this.empleado.nombre_user= this.user.user;
+      this.empleadosServices.createEmp(this.empleado)
+      .subscribe(
+        res=>{ 
+          swal('Empleado creado con exito!');
+          console.log(this.empleado);
+          this.router.navigate(['/empleados']);
+        },
+        err=> console.error(err)
+      );
+     
+    });
+        
   }
+  
 
   getList(){
     this.departamentosServices.getDep()
@@ -68,18 +84,28 @@ export class AggEmpComponent implements OnInit {
         err=>console.error(err)
       );
   }
-
   updateEmp(){
-    delete this.empleado.nombre_departamento;
-    delete this.empleado.descripcion_dep;
+
+    swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
+      .then((value) => {
+        delete this.empleado.nombre_departamento;
+        delete this.empleado.descripcion_dep;
+        
+        this.empleado.id_user = this.user.id_usuario;
+        this.empleado.nombre_user = this.user.user;
+    
     console.log(this.empleado);
-    this.empleadosServices.updateEmp(this.empleado.id_empleado, this.empleado)
-      .subscribe(
-        res =>{
-          console.log(res);
-          this.router.navigate(['/empleados']);
-        },
-        err=> console.error(err)
+        this.empleadosServices.updateEmp(this.empleado.id_empleado, this.empleado)
+                .subscribe(
+                  res =>{
+                  swal('Perfecto','El empleado fue actualizado con exito','success');
+                  this.router.navigate(['/empleados']);
+                  console.log(res);},
+                 err=> console.error(err)
       );
-  }
+      });
+    }
+  
+
+  
 }

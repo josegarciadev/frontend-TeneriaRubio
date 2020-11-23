@@ -13,3 +13,5 @@ export {EntradaempleadosService} from './pages/entradaempleados.service';
 export {EntradalineaService} from './pages/entradalinea.service';
 export {SalidalineaService} from './pages/salidalinea.service';
 export {SalidaempleadoService} from './pages/salidaempleado.service';
+export {AuditoriasAlmacenService} from './pages/auditoriasAlmacen.service';
+export {AuditoriasRecursosHService} from './pages/auditoriasRecursosh.service';

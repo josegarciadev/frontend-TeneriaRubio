@@ -16,9 +16,12 @@ export class UsuarioService {
   login(user:Usuario){
     return this.http.post(`${this.API_URL}/usuarios/login/`,user);
   }
+  getrol(){
+    return this.http.get(`${this.API_URL}/usuarios/rol`);
+  }
 
   getOneUser(id:number | string){
-    return this.http.get(`${this.API_URL}/usuarios/${id}`);
+    return this.http.get(`${this.API_URL}/usuarios/getone/${id}`);
   }
 
   createUser(user: Usuario){
@@ -32,4 +35,5 @@ export class UsuarioService {
   deleteUser(id:number | string){
     return this.http.delete(`${this.API_URL}/usuarios/${id}`);
   }
+
 }

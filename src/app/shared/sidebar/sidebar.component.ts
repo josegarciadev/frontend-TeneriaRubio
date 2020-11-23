@@ -8,29 +8,35 @@ import { SidebarService } from '../../services/services.index';
 })
 export class SidebarComponent implements OnInit {
   public query :any = [];
+  public menus :any = [];
+  public user :any= JSON.parse(localStorage.getItem('usuario'));
+  
   constructor(public sidebarService: SidebarService) { }
-
+  
   ngOnInit() {
-    this.getList();
+    
+    this.getMenu(this.user.rol);
+    
   }
 
-  getList(){
-    this.sidebarService.listMenu()
-      .subscribe(
-        res =>{
-          this.query = res;
-          for(let i=0; i < this.query.length; i++){
-            this.query[i].submenu= JSON.parse(this.query[i].submenu);
-           
-          }
-       
-        },
-        err => console.error(err)
-      )
+
+  getMenu(id){
+    this.sidebarService.getMenu(id).subscribe(
+      res=>{
+        this.menus = res;
+        
+        for(let i=0; i < this.menus.length; i++){
+          this.menus[i].submenu= JSON.parse(this.menus[i].submenu);
+         
+        }
+  
+      },
+      err => console.error(err)
+    );
   }
   cerrar(){
     localStorage.removeItem('usuario');
-    console.log('se ejecuta el cerrar');
+  
   }
 
 }

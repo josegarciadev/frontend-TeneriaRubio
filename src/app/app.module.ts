@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common'
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,9 +16,7 @@ import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
 
 
-// servicios
-
-
+// PDF
 
 
 
@@ -33,7 +32,8 @@ import { ServiceModule } from './services/service.module';
     PagesModule,
     ServiceModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    NgxPaginationModule
   ],
   providers: [
   ],

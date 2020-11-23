@@ -4,6 +4,7 @@ import {EmpleadosService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
 import {SalidaLinea} from '../../../Models/salidaLinea';
 import {Router,ActivatedRoute}  from '@angular/router';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-agg-sal-linea',
   templateUrl: './agg-sal-linea.component.html',
@@ -24,20 +25,23 @@ export class AggSalLineaComponent implements OnInit {
     id_lineaprod:0,
     fecha:new Date,
     cantidad:0,
-    id_empleado:0
+    id_empleado:0,
+    id_user:0,
+    nombre_user:''
   };
+  public orden :number | string;
   public estado :boolean=false;
   public query1:any=[];
   public query2:any =[];
   public query3:any =[];
-
+  public user:any = JSON.parse(localStorage.getItem('usuario'));
 constructor(private salidalineaService: SalidalineaService,private empleadosService:EmpleadosService,private lineaService:LineaService,private router:Router,
   private activatedRouter:ActivatedRoute) { }
 
 ngOnInit() {
   this.getListLinea();
   this.getListEmpleado();
-
+  
   const params=this.activatedRouter.snapshot.params.id;
   if(params){
     this.getOne(params);
@@ -77,24 +81,31 @@ getListProdprov(id:any){
       err=>console.error(err)
     );
 }
-
 saveSalLinea(){
-  this.enviar.nro_orden= this.salida.nro_orden;
-  this.enviar.id_linea= this.salida.id_linea;
-  this.enviar.id_lineaprod= this.salida.id_lineaprod;
-  this.enviar.fecha= this.salida.fecha;
-  this.enviar.cantidad= this.salida.cantidad;
-  this.enviar.id_empleado= this.salida.id_empleado;
-  
-  this.salidalineaService.createSalLinea(this.enviar)
-  .subscribe(
-    res=>{
-      this.router.navigate(['/salidaLinea']);
-    },
-    err=> console.error(err)
-  );
-}
+  swal("¿Esta seguro de crear la entrada de linea?")
+  .then((value) => {
+    this.enviar.nro_orden= this.salida.nro_orden;
+    this.enviar.id_linea= this.salida.id_linea;
+    this.enviar.id_lineaprod= this.salida.id_lineaprod;
+    this.enviar.fecha= this.salida.fecha;
+    this.enviar.cantidad= this.salida.cantidad;
+    this.enviar.id_empleado= this.salida.id_empleado;
 
+    this.enviar.id_user = this.user.id_usuario;
+    this.enviar.nombre_user= this.user.user;
+    this.salidalineaService.createSalLinea(this.enviar)
+    .subscribe(
+      res=>{ 
+        swal('Salida de linea creado con exito!');
+        console.log(this.enviar);
+        this.router.navigate(['/salidaLinea']);
+      },
+      err=> console.error(err)
+    );
+   
+  });
+      
+}
 
 
 getOne(id:number | string){
@@ -102,33 +113,37 @@ getOne(id:number | string){
     .subscribe(
       res=>{
         this.salida=res;
+        this.orden= this.salida.nro_orden;
         let id = this.salida.id_linea;
          this.getListProdprov(id);
-        
+         
       },
       err=>console.error(err)
     );
 }
-
 updateSalLinea(){
 
-  this.enviar.nro_orden= this.salida.nro_orden;
-  this.enviar.id_linea= this.salida.id_linea;
-  this.enviar.id_lineaprod= this.salida.id_lineaprod;
-  this.enviar.fecha= this.salida.fecha;
-  this.enviar.cantidad= this.salida.cantidad;
-  this.enviar.id_empleado= this.salida.id_empleado;
-  
-  console.log(this.enviar);
-  
- 
-  this.salidalineaService.updateSalLinea(this.enviar.nro_orden, this.enviar)
-    .subscribe(
-      res =>{
-        console.log(res);
-        this.router.navigate(['/salidaLinea']);
-      },
-      err=> console.error(err)
+  swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
+    .then((value) => {
+      this.enviar.nro_orden= this.salida.nro_orden;
+      this.enviar.id_linea= this.salida.id_linea;
+      this.enviar.id_lineaprod= this.salida.id_lineaprod;
+      this.enviar.fecha= this.salida.fecha;
+      this.enviar.cantidad= this.salida.cantidad;
+      this.enviar.id_empleado= this.salida.id_empleado;
+     
+      this.enviar.id_user = this.user.id_usuario;
+      this.enviar.nombre_user = this.user.user;
+    
+      this.salidalineaService.updateSalLinea(this.orden, this.enviar)
+              .subscribe(
+                res =>{
+                swal('Perfecto','La Salida de linea fue actualizado con exito','success');
+                this.router.navigate(['/salidaLinea']);
+                console.log(res);},
+               err=> console.error(err)
     );
-}
+    });
+  }
+
 }

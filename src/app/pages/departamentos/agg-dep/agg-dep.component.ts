@@ -54,9 +54,7 @@ export class AggDepComponent implements OnInit {
       );
      
     });
-      
-   
-    
+        
   }
 
   getOne(id:number | string){

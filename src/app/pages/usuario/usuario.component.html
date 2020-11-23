@@ -4,7 +4,10 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Usuarios</h4>
-                <h6 class="card-subtitle">Todos los campos con <code>*</code> son obligatorios</h6>
+                <h6 class="card-subtitle"><div class="col-lg-2 col-md-4 m-2" >
+                    <button type="button" class="btn btn-rounded btn-block btn-info" (click)="generatePDF()">Imprimir</button>
+                </div></h6>
+                
                 <div class="table-responsive">
                     <table class="table color-table info-table">
                         <thead>
@@ -24,9 +27,9 @@
                                 <td>{{user.cedula}}</td>
                                 <td>{{user.nombre +' '+user.apellido }}</td>
                                 <td>{{user.status}}</td>
-                                <td>imagen</td>
+                                <td><a class="pointer" ><img src="/assets/images/detalles.jpg"></a></td>
                                 <td><a class="pointer" routerLink="/editUsuarios/{{user.id_usuario}}" ><img src="./assets/images/editar.png"></a></td>
-                                <td><a class="pointer" (click)='deleteEmp(user.id_usuario)' ><img src="/assets//images/borrar.png"></a></td>
+                                <td><a class="pointer" (click)='deleteUser(user.id_usuario)' ><img src="/assets//images/borrar.png"></a></td>
                                 
                             </tr>
                             

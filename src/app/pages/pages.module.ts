@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common'
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -48,6 +49,7 @@ import { AggEntEmpComponent } from './entrada-emp/agg-ent-emp/agg-ent-emp.compon
 import { RecursoshComponent } from './auditorias/recursosh/recursosh.component';
 import { AlmacenComponent } from './auditorias/almacen/almacen.component';
 
+
 @NgModule({
     declarations: [
         PagesComponent,
@@ -84,7 +86,8 @@ import { AlmacenComponent } from './auditorias/almacen/almacen.component';
         AggUsuarioComponent,
         AggEntEmpComponent,
         RecursoshComponent,
-        AlmacenComponent
+        AlmacenComponent,
+ 
     ],
     exports: [
         PagesComponent,
@@ -97,7 +100,8 @@ import { AlmacenComponent } from './auditorias/almacen/almacen.component';
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        CommonModule
+        CommonModule,
+        NgxPaginationModule
     ]
 
 })

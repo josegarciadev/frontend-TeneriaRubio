@@ -96,7 +96,18 @@
                             </div>
                             <!--/span-->
                         </div>
-                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Rol</label>
+                                    <select class="form-control custom-select" name="id_empleado" [(ngModel)]='usuario.rol'>
+                                        <option selected=true value="null">Seleccionar</option>
+                                        <option *ngFor='let rol of query' [value]="rol.id_rol">{{rol.nombre}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                        
                     </div>
                     <div class="form-actions text-center">

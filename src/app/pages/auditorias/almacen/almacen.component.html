@@ -1,1 +1,187 @@
-<p>almacen works!</p>
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabla Entrada y salidas ordenes</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Tabla</th>
+                                <th># Orden</th>
+                                <th>Linea</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Cantidad</th>
+                                <th>Empleado</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let entsal of entradaSalida| paginate: { itemsPerPage: 5, currentPage: p } '>
+                                <td>{{entsal.id_usuario}}</td>
+                                <td>{{entsal.nombre}}</td>
+                                <td>{{entsal.fecha}} </td>
+                                <td>{{entsal.accion}}</td>
+                                <td>{{entsal.tabla}}</td>
+                                <td>{{entsal.nro_orden}}</td>
+                                <td>{{entsal.id_linea }}</td>
+                                <td>{{entsal.id_lineaprod}}</td>
+                                <td>{{entsal.fecha_orden}}</td>
+                                <td>{{entsal.cantidad}}</td>
+                                <td>{{entsal.id_empleado}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->
+
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabla Entrada y salidas Update</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Tabla</th>
+                                <th>Antes # Orden</th>
+                                <th>Antes Linea</th>
+                                <th>Antes Producto</th>
+                                <th>Antes Fecha</th>
+                                <th>Antes Cantidad</th>
+                                <th>Antes Empleado</th>
+                                <th>Nuevo # Orden</th>
+                                <th>Nuevo Linea</th>
+                                <th>Nuevo Producto</th>
+                                <th>Nuevo Fecha</th>
+                                <th>Nuevo Cantidad</th>
+                                <th>Nuevo Empleado</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let entsalup of entradaSalidaup | paginate: { itemsPerPage: 5, currentPage: x }'>
+                                <td>{{entsalup.id_usuario}}</td>
+                                <td>{{entsalup.nombre}}</td>
+                                <td>{{entsalup.fecha}} </td>
+                                <td>{{entsalup.accion}}</td>
+                                <td>{{entsalup.tabla}}</td>
+                                <td>{{entsalup.nro_orden}}</td>
+                                <td>{{entsalup.id_linea }}</td>
+                                <td>{{entsalup.id_lineaprod}}</td>
+                                <td>{{entsalup.fecha_orden}}</td>
+                                <td>{{entsalup.cantidad}}</td>
+                                <td>{{entsalup.id_empleado}}</td>
+                                <td>{{entsalup.new_orden}}</td>
+                                <td>{{entsalup.new_linea }}</td>
+                                <td>{{entsalup.new_lineaprod}}</td>
+                                <td>{{entsalup.new_fecha}}</td>
+                                <td>{{entsalup.new_cantidad}}</td>
+                                <td>{{entsalup.new_id_empleado}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="x = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Auditoria Usuarios</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Id </th>
+                                <th>Cedula</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Telefono</th>
+                                <th>Fecha de Registro</th>
+                                <th>Email</th>
+                                <th>Usuario</th>
+                                <th>Contraseña</th>
+                                <th>Direccion</th>
+                                <th>Status</th>
+                                <th>Foto</th>
+                                <th>Rol</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let user of usuarios | paginate: { itemsPerPage: 5, currentPage: y }'>
+                                <td>{{user.id_usuario_a}}</td>
+                                <td>{{user.nombre_a}}</td>
+                                <td>{{user.fecha}} </td>
+                                <td>{{user.accion}}</td>
+                                <td>{{user.id_usuario}}</td>
+                                <td>{{user.cedula}}</td>
+                                <td>{{user.nombre }}</td>
+                                <td>{{user.apellido}}</td>
+                                <td>{{user.telefono}}</td>
+                                <td>{{user.fecha_registro}}</td>
+                                <td>{{user.correo_elec}}</td>
+                                <td>{{user.user}}</td>
+                                <td>{{user.pass }}</td>
+                                <td>{{user.direccion}}</td>
+                                <td>{{user.status}}</td>
+                                <td>{{user.foto}}</td>
+                                <td>{{user.rol}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="y = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

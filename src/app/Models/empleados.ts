@@ -10,4 +10,6 @@ export interface Empleados{
     id_departamento?:number | string;
     nombre_departamento?:string;
     descripcion_dep?:string;
+    id_user?:number | string;
+    nombre_user?: string;
 }
