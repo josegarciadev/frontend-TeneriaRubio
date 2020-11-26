@@ -15,7 +15,7 @@ export class EntradaLineaComponent implements OnInit {
     nombre_user:''
   };
   public someJSONdata:any=[];
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
   public date= new Date();
   public fecha ;
   constructor(private entradalineaService:EntradalineaService, private router: Router) {

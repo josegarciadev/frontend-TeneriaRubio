@@ -1,0 +1,66 @@
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Auditoria Usuarios</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Id </th>
+                                <th>Cedula</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Telefono</th>
+                                <th>Fecha de Registro</th>
+                                <th>Email</th>
+                                <th>Usuario</th>
+                                <th>Contraseña</th>
+                                <th>Direccion</th>
+                                <th>Status</th>
+                                <th>Foto</th>
+                                <th>Rol</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let user of usuarios | paginate: { itemsPerPage: 5, currentPage: y ,id:"users"}'>
+                                <td>{{user.id_usuario_a}}</td>
+                                <td>{{user.nombre_a}}</td>
+                                <td>{{user.fecha}} </td>
+                                <td>{{user.accion}}</td>
+                                <td>{{user.id_usuario}}</td>
+                                <td>{{user.cedula}}</td>
+                                <td>{{user.nombre }}</td>
+                                <td>{{user.apellido}}</td>
+                                <td>{{user.telefono}}</td>
+                                <td>{{user.fecha_registro}}</td>
+                                <td>{{user.correo_elec}}</td>
+                                <td>{{user.user}}</td>
+                                <td>{{user.pass }}</td>
+                                <td>{{user.direccion}}</td>
+                                <td>{{user.status}}</td>
+                                <td>{{user.foto}}</td>
+                                <td>{{user.rol}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="y = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="users"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

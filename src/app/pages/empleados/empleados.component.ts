@@ -1,13 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {EmpleadosService} from '../../services/services.index';
+import {Empleados} from '../../Models/empleados';
 import swal from 'sweetalert';
 import * as printJS from 'print-js';
+import * as moment from 'moment';
 @Component({
   selector: 'app-empleados',
   templateUrl: './empleados.component.html',
   styles: []
 })
 export class EmpleadosComponent implements OnInit {
+  public empleado:Empleados={
+    id_empleado: 0,
+    cedula: 0,
+    nombres:'',
+    genero:'Seleccionar',
+    fecha_nac:new Date(),
+    fecha_ing:new Date(),
+    direccion:'',
+    telefono:'',
+    id_departamento:0,
+    nombre_departamento:'',
+    id_user:0,
+    nombre_user:''
+  }
   public query :any =[];
   public enviar:any={
     id_user:0,
@@ -16,13 +32,16 @@ export class EmpleadosComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public hora= moment(new Date()).format("YYYY-MM-DD HH:mm:ss"); 
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
   constructor(private empleadosServices: EmpleadosService) {
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
+    
    }
 
   ngOnInit() {
     this.getList();
+    console.log('hora '+this.hora);
   }
 
   getList(){
@@ -35,7 +54,35 @@ export class EmpleadosComponent implements OnInit {
     )
   }
 
-  
+  getOne(id:number | string){
+
+    this.empleadosServices.getOneEmp(id)
+      .subscribe(
+        res=>{
+          this.empleado=res;
+          swal({
+            title:`Sobre Mi `,
+            text:`
+            Cedula: ${this.empleado.cedula}\n
+            Nombres: ${this.empleado.nombres}\n
+            Genero: ${this.empleado.genero}\n
+            Fecha de nacimiento: ${this.empleado.fecha_nac}\n
+            Fecha de ingreso: ${this.empleado.fecha_ing}\n
+            Dirección: ${this.empleado.direccion}\n
+            Telefono: ${this.empleado.telefono}\n
+            Departamento: ${this.empleado.nombre_departamento}\n
+            `,
+            icon:'info',
+            
+          });
+          
+          console.log(this.empleado);
+        },
+        err=>console.error(err)
+      );
+
+
+  }
 
 
   deleteEmp(id:number | string){

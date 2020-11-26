@@ -24,7 +24,7 @@ export class SalidaLineaComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    this.user= JSON.parse(localStorage.getItem('usuario'));
+    this.user= JSON.parse(sessionStorage.getItem('user'));
   }
 
   getList(){

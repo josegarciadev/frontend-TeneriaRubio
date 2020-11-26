@@ -1,0 +1,66 @@
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabla Entrada y salidas Update</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Tabla</th>
+                                <th>Antes # Orden</th>
+                                <th>Antes Linea</th>
+                                <th>Antes Producto</th>
+                                <th>Antes Fecha</th>
+                                <th>Antes Cantidad</th>
+                                <th>Antes Empleado</th>
+                                <th>Nuevo # Orden</th>
+                                <th>Nuevo Linea</th>
+                                <th>Nuevo Producto</th>
+                                <th>Nuevo Fecha</th>
+                                <th>Nuevo Cantidad</th>
+                                <th>Nuevo Empleado</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let entsalup of entradaSalidaup | paginate: { itemsPerPage: 5, currentPage: x, id:"Update"}'>
+                                <td>{{entsalup.id_usuario}}</td>
+                                <td>{{entsalup.nombre}}</td>
+                                <td>{{entsalup.fecha}} </td>
+                                <td>{{entsalup.accion}}</td>
+                                <td>{{entsalup.tabla}}</td>
+                                <td>{{entsalup.nro_orden}}</td>
+                                <td>{{entsalup.id_linea }}</td>
+                                <td>{{entsalup.id_lineaprod}}</td>
+                                <td>{{entsalup.fecha_orden}}</td>
+                                <td>{{entsalup.cantidad}}</td>
+                                <td>{{entsalup.id_empleado}}</td>
+                                <td>{{entsalup.new_orden}}</td>
+                                <td>{{entsalup.new_linea }}</td>
+                                <td>{{entsalup.new_lineaprod}}</td>
+                                <td>{{entsalup.new_fecha}}</td>
+                                <td>{{entsalup.new_cantidad}}</td>
+                                <td>{{entsalup.new_id_empleado}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="x = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="Update"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

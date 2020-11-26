@@ -11,6 +11,8 @@ import swal from 'sweetalert';
   styles: []
 })
 export class AggEmpComponent implements OnInit {
+    public date= new Date();
+
     public empleado:Empleados={
       id_empleado: 0,
       cedula: 0,
@@ -29,11 +31,12 @@ export class AggEmpComponent implements OnInit {
     public estado :boolean=false;
     public query:any=[];
   constructor(private empleadosServices: EmpleadosService,private router:Router, private departamentosServices:DepartamentosService,
-    private activatedRouter:ActivatedRoute) { }
+    private activatedRouter:ActivatedRoute) {
+     }
 
   ngOnInit() {
     this.getList();
-    this.user= JSON.parse(localStorage.getItem('usuario'));
+    this.user= JSON.parse(sessionStorage.getItem('user'));
     const params=this.activatedRouter.snapshot.params.id;
     if(params){
       this.getOne(params);
@@ -46,14 +49,13 @@ export class AggEmpComponent implements OnInit {
       delete this.empleado.id_empleado;
       delete this.empleado.nombre_departamento;
       delete this.empleado.descripcion_dep;
-  
+      
       this.empleado.id_user = this.user.id_usuario;
       this.empleado.nombre_user= this.user.user;
       this.empleadosServices.createEmp(this.empleado)
       .subscribe(
         res=>{ 
           swal('Empleado creado con exito!');
-          console.log(this.empleado);
           this.router.navigate(['/empleados']);
         },
         err=> console.error(err)

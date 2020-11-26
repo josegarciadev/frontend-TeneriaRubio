@@ -15,8 +15,8 @@ import { APP_ROUTES } from './app.routes';
 import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
 
-
-// PDF
+// Guards
+import {AutenticarGuard} from './guards/autenticar.guard';
 
 
 
@@ -36,6 +36,7 @@ import { ServiceModule } from './services/service.module';
     NgxPaginationModule
   ],
   providers: [
+    AutenticarGuard
   ],
   bootstrap: [AppComponent]
 })

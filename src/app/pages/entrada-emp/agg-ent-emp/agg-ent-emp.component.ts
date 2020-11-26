@@ -26,7 +26,7 @@ export class AggEntEmpComponent implements OnInit {
   }
   public estado :boolean=false;
   public query:any=[];
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
 constructor(private empleadosServices: EmpleadosService,private router:Router, private entradaempleadosService:EntradaempleadosService,
   private activatedRouter:ActivatedRoute) { }
 

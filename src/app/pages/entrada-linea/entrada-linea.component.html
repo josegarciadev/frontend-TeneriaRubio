@@ -17,8 +17,8 @@
                                 <th>Fecha</th>
                                 <th>Cantidad</th>
                                 <th>Empleado</th>
-                                <th>Editar</th>
-                                <th>Borrar</th>
+                                <th *ngIf='user.rol !=2'>Editar</th>
+                                <th *ngIf='user.rol !=2'>Borrar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,8 +29,8 @@
                                 <td>{{entLinea.fecha | date}}</td>
                                 <td>{{entLinea.cantidad}}</td>
                                 <td>{{entLinea.nombres}}</td>
-                                <td><a class="pointer" routerLink="/editEntLinea/{{entLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
-                                <td><a class="pointer" (click)='deleteEntLinea(entLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" routerLink="/editEntLinea/{{entLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" (click)='deleteEntLinea(entLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
                                 
                             </tr>
                             

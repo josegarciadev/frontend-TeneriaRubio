@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let entrada of entradas| paginate: { itemsPerPage: 5, currentPage: p } '>
+                            <tr *ngFor='let entrada of entradas| paginate: { itemsPerPage: 5, currentPage: p, id:"entradas" } '>
                                 <td>{{entrada.id_usuario}}</td>
                                 <td>{{entrada.nombre}}</td>
                                 <td>{{entrada.fecha}} </td>
@@ -36,7 +36,7 @@
                     </table>
                     <pagination-controls (pageChange)="p = $event" responsive="true"
                     previousLabel="Anterior"
-                    nextLabel="Siguiente"></pagination-controls>
+                    nextLabel="Siguiente" id="entradas"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let sal of salidas | paginate: { itemsPerPage: 5, currentPage: x }'>
+                            <tr *ngFor='let sal of salidas | paginate: { itemsPerPage: 5, currentPage: x, id:"salidas" }'>
                                 <td>{{sal.id_usuario}}</td>
                                 <td>{{sal.nombre}}</td>
                                 <td>{{sal.fecha}} </td>
@@ -85,7 +85,7 @@
                     </table>
                     <pagination-controls (pageChange)="x = $event" responsive="true"
                     previousLabel="Anterior"
-                    nextLabel="Siguiente"></pagination-controls>
+                    nextLabel="Siguiente" id="salidas"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let emp of empleados | paginate: { itemsPerPage: 5, currentPage: y }'>
+                            <tr *ngFor='let emp of empleados | paginate: { itemsPerPage: 5, currentPage: y,id:"empleados" }'>
                                 <td>{{emp.id_usuario}}</td>
                                 <td>{{emp.nombre}}</td>
                                 <td>{{emp.fecha | date}} </td>
@@ -134,8 +134,8 @@
                                 <td>{{emp.cedula}}</td>
                                 <td>{{emp.nombres}}</td>
                                 <td>{{emp.genero}}</td>
-                                <td>{{emp.fecha_nac| date}}</td>
-                                <td>{{emp.fecha_ing| date}}</td>
+                                <td>{{emp.fecha_nac}}</td>
+                                <td>{{emp.fecha_ing}}</td>
                                 <td>{{emp.direccion }}</td>
                                 <td>{{emp.telefono}}</td>
                                 <td>{{emp.id_departamento}}</td>
@@ -147,7 +147,7 @@
                     </table>
                     <pagination-controls (pageChange)="y = $event" responsive="true"
                     previousLabel="Anterior"
-                    nextLabel="Siguiente"></pagination-controls>
+                    nextLabel="Siguiente" id="empleados"></pagination-controls>
                 </div>
             </div>
         </div>

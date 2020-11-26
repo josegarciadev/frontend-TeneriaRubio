@@ -21,7 +21,7 @@ export class UsuarioComponent implements OnInit {
   public someJSONdata:any=[];
 
 
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
   ngOnInit() {
     this.getList();
     console.log(this.fecha); 

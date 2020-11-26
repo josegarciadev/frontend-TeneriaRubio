@@ -17,8 +17,8 @@
                                 <th>Fecha</th>
                                 <th>Cantidad</th>
                                 <th>Empleado</th>
-                                <th>Editar</th>
-                                <th>Borrar</th>
+                                <th *ngIf='user.rol !=2'>Editar</th>
+                                <th *ngIf='user.rol !=2'>Borrar</th>
                                 
                                 
                             </tr>
@@ -31,8 +31,8 @@
                                 <td>{{salLinea.fecha | date}}</td>
                                 <td>{{salLinea.cantidad}}</td>
                                 <td>{{salLinea.nombres}}</td>
-                                <td><a class="pointer" routerLink="/editSalLinea/{{salLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
-                                <td><a class="pointer" (click)='deleteSalLinea(salLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" routerLink="/editSalLinea/{{salLinea.nro_orden}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" (click)='deleteSalLinea(salLinea.nro_orden)' ><img src="/assets//images/borrar.png"></a></td>
                                 
                             </tr>
                             

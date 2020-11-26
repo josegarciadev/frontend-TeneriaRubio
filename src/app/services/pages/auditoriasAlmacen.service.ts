@@ -13,6 +13,9 @@ export class AuditoriasAlmacenService {
   getEntsal(){
     return this.http.get(`${this.API_URL}/audital/entsal/`);
   }
+  getSesiones(){
+    return this.http.get(`${this.API_URL}/audital/sesiones/`);
+  }
   
   getEntSalUp(){
     return this.http.get(`${this.API_URL}/audital/entsalup/`);

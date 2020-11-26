@@ -26,13 +26,14 @@ export class AggUsuarioComponent implements OnInit {
     id_user:0,
     nombre_user:''
   }
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
   public query:any=[];
   public estado :boolean=false;
   constructor(private usuarioServices: UsuarioService,private router:Router,private activatedRouter:ActivatedRoute) { }
 
   ngOnInit() {
     this.gerRol();
+    console.log(this.user);
     const params=this.activatedRouter.snapshot.params.id;
     if(params){
       this.getOne(params);

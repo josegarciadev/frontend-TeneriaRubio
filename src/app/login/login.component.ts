@@ -25,23 +25,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
+    if(sessionStorage.getItem('user')){
+      this.usuarioServices.log=true;
+      this.route.navigate(['/dashboard']);
+    }else{
+      this.usuarioServices.log=false;
+    }
+    
   }
   ingresar(){
     if(this.usuario.user != ''){
       if(this.usuario.pass != ''){
-    this.usuarioServices.login(this.usuario).subscribe(
-      res=>{
-        let resp:any = res;console.log(resp);
-        if(resp.message == false){
-          console.log(resp);
-          swal('Error','Credenciales invalidas','error');
-        }else{
-          
-          localStorage.setItem('usuario',JSON.stringify(resp));
-          this.route.navigate(['/dashboard']);
-        }
-      },err => console.error(err)
-    );
+    this.usuarioServices.login(this.usuario);
   }else{
     swal('Error','El campo Contraseña no puede estar vacio.','warning');
   }

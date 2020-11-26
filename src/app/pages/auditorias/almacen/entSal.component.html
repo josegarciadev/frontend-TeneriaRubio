@@ -1,0 +1,54 @@
+ <!-- ============================================================== -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabla Entrada y salidas ordenes</h4>
+               
+                <div class="table-responsive">
+                    <table class="table color-table info-table">
+                        <thead>
+                            <tr>
+                                <th>By: Id </th>
+                                <th>By: Nombre </th>
+                                <th>Fecha audit</th>
+                                <th>Accion</th>
+                                <th>Tabla</th>
+                                <th># Orden</th>
+                                <th>Linea</th>
+                                <th>Producto</th>
+                                <th>Fecha</th>
+                                <th>Cantidad</th>
+                                <th>Empleado</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let entsal of entradaSalida| paginate: { itemsPerPage: 5, currentPage: p ,id:"entsal" } '>
+                                <td>{{entsal.id_usuario}}</td>
+                                <td>{{entsal.nombre}}</td>
+                                <td>{{entsal.fecha}} </td>
+                                <td>{{entsal.accion}}</td>
+                                <td>{{entsal.tabla}}</td>
+                                <td>{{entsal.nro_orden}}</td>
+                                <td>{{entsal.id_linea }}</td>
+                                <td>{{entsal.id_lineaprod}}</td>
+                                <td>{{entsal.fecha_orden}}</td>
+                                <td>{{entsal.cantidad}}</td>
+                                <td>{{entsal.id_empleado}}</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="entsal"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<!-- row -->

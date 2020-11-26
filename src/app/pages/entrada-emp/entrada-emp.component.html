@@ -17,8 +17,8 @@
                                 <th>Departamento</th>
                                 <th>Fecha</th>
                                 <th>Descripción</th>
-                                <th>Editar</th>
-                                <th>Borrar</th>
+                                <th *ngIf='user.rol !=2'>Editar</th>
+                                <th *ngIf='user.rol !=2'>Borrar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,8 +29,8 @@
                                 <td>{{emp.nombre_departamento}}</td>
                                 <td>{{emp.fecha_entrada | date }}</td>
                                 <td>{{emp.descripcion}}</td>
-                                <td><a class="pointer" routerLink="/editEntEmpleados/{{emp.id_entrada}}" ><img src="./assets/images/editar.png"></a></td>
-                                <td><a class="pointer" (click)='deleteEmp(emp.id_entrada)' ><img src="/assets//images/borrar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" routerLink="/editEntEmpleados/{{emp.id_entrada}}" ><img src="./assets/images/editar.png"></a></td>
+                                <td *ngIf='user.rol !=2'><a class="pointer" (click)='deleteEmp(emp.id_entrada)' ><img src="/assets//images/borrar.png"></a></td>
                                 
                             </tr>
                             

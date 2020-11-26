@@ -41,7 +41,7 @@ constructor(private entradalineaService: EntradalineaService,private empleadosSe
 ngOnInit() {
   this.getListLinea();
   this.getListEmpleado();
-  this.user= JSON.parse(localStorage.getItem('usuario'));
+  this.user= JSON.parse(sessionStorage.getItem('user'));
   
   const params=this.activatedRouter.snapshot.params.id;
   if(params){

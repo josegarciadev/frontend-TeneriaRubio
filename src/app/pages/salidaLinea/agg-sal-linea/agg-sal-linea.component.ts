@@ -34,7 +34,7 @@ export class AggSalLineaComponent implements OnInit {
   public query1:any=[];
   public query2:any =[];
   public query3:any =[];
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
 constructor(private salidalineaService: SalidalineaService,private empleadosService:EmpleadosService,private lineaService:LineaService,private router:Router,
   private activatedRouter:ActivatedRoute) { }
 
@@ -96,9 +96,15 @@ saveSalLinea(){
     this.salidalineaService.createSalLinea(this.enviar)
     .subscribe(
       res=>{ 
-        swal('Salida de linea creado con exito!');
-        console.log(this.enviar);
-        this.router.navigate(['/salidaLinea']);
+        let resp:any= res;
+        console.log(resp);
+        if(resp.message==false){
+          swal('Atención!','La cantidad no es valida','warning');
+        }else{
+          swal('Correcto','Salida de linea creado con exito!','success');
+          this.router.navigate(['/salidaLinea']);
+        }
+       
       },
       err=> console.error(err)
     );

@@ -16,7 +16,7 @@ export class SalidaEmpComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
-  public user:any = JSON.parse(localStorage.getItem('usuario'));
+  public user:any = JSON.parse(sessionStorage.getItem('user'));
   constructor(private salidaempleadoService: SalidaempleadoService) {
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
    }

@@ -48,8 +48,13 @@ import { AggUsuarioComponent } from './usuario/agg-usuario/agg-usuario.component
 import { AggEntEmpComponent } from './entrada-emp/agg-ent-emp/agg-ent-emp.component';
 import { RecursoshComponent } from './auditorias/recursosh/recursosh.component';
 import { AlmacenComponent } from './auditorias/almacen/almacen.component';
-
-
+import {EntSalComponent} from './auditorias/almacen/entSal.component';
+import {UpdateComponent} from './auditorias/almacen/update.component';
+import {GetUsuariosComponent} from './auditorias/almacen/getusuarios.component';
+import {AutenticarGuard} from '../guards/autenticar.guard';
+import {RootRolGuard} from '../guards/root-rol.guard';
+import {AdminalRolGuard} from '../guards/adminal-rol.guard';
+import {AdminrhRolGuard} from '../guards/adminrh-rol.guard';
 @NgModule({
     declarations: [
         PagesComponent,
@@ -87,7 +92,9 @@ import { AlmacenComponent } from './auditorias/almacen/almacen.component';
         AggEntEmpComponent,
         RecursoshComponent,
         AlmacenComponent,
- 
+        EntSalComponent,
+        UpdateComponent,
+        GetUsuariosComponent
     ],
     exports: [
         PagesComponent,
@@ -102,6 +109,12 @@ import { AlmacenComponent } from './auditorias/almacen/almacen.component';
         ChartsModule,
         CommonModule,
         NgxPaginationModule
+    ],
+    providers:[
+        AutenticarGuard,
+        RootRolGuard,
+        AdminalRolGuard,
+        AdminrhRolGuard
     ]
 
 })
