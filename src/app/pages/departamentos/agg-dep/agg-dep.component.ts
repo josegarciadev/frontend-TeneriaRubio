@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DepartamentosService} from '../../../services/services.index';
 import {Departamentos} from '../../../Models/departamentos';
+import {FormGroup,FormBuilder, Validators} from '@angular/forms';
 import {Router,ActivatedRoute}  from '@angular/router';
 import swal from 'sweetalert';
 @Component({
@@ -10,44 +11,54 @@ import swal from 'sweetalert';
 })
 export class AggDepComponent implements OnInit {
 
-
-  public departamento:any={
-    id_departamento: 0,
-    nombre_departamento:'',
-    descripcion_dep:''
+  constructor(private departamentoServices: DepartamentosService, private router:Router,
+    private activatedRouter: ActivatedRoute,private formBuilder: FormBuilder) {
+}
   
-  }
 
   public estado: boolean=false;
-  public prueba:any = JSON.parse(localStorage.getItem('usuario'));
-   
-  constructor(private departamentoServices: DepartamentosService, private router:Router,
-    private activatedRouter: ActivatedRoute) {
-
-   }
-
+  public prueba:any = JSON.parse(sessionStorage.getItem('usuario'));
+  public params;
+   public departamentoForm:FormGroup; 
   ngOnInit() {
-    console.log(this.prueba);
-    const params=this.activatedRouter.snapshot.params.id;
-    if(params){
-      this.getOne(params);
+    this.departamentoForm = this.formBuilder.group({
+    nombre_departamento: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(100)]],
+    descripcion_dep: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(60)]]
+  });
+    
+   this.params=this.activatedRouter.snapshot.params.id;
+    if(this.params){
+      this.getOne(this.params);
       this.estado=true;
     }
     
   }
 
-  saveDep(){
+  get nombredepartamento(){
+    return this.departamentoForm.get('nombre_departamento');
+  }
+  get descripciondep(){
+    return this.departamentoForm.get('descripcion_dep');
+  }
+  submit(){
+    if(this.departamentoForm.valid){
+
+      if(this.estado===true){
+        this.updateDep(this.departamentoForm.value);
+      }else{
+        this.saveDep(this.departamentoForm.value);
+      }
+    }
+  }
+  saveDep(departamento){
+    
     swal("¿Esta seguro de crear el departamento?")
     .then((value) => {
-      delete this.departamento.id_departamento;
-      this.departamento.id_user = this.prueba.id_usuario;
-      this.departamento.nombre_user= this.prueba.user;
-      
-      this.departamentoServices.createDep(this.departamento)
+      this.departamentoServices.createDep(departamento)
       .subscribe(
         res=>{ 
           swal('Departamento creado con exito!');
-          console.log(this.departamento);
+          
           this.router.navigate(['/departamentos']);
         },
         err=> console.error(err)
@@ -56,31 +67,34 @@ export class AggDepComponent implements OnInit {
     });
         
   }
-
+  cancelar(){
+    this.router.navigate(['/departamentos']);
+  }
   getOne(id:number | string){
     this.departamentoServices.getOneDep(id)
       .subscribe(
         res=>{
-          this.departamento=res;
+          this.departamentoForm.patchValue(res);
 
         },
         err=>console.error(err)
       );
   }
 
-  updateDep(){
-    swal("Actualizar",`¿Esta seguro de actualizar? \n \n Departamento: ${this.departamento.nombre_departamento} \n Descripcion: ${this.departamento.descripcion_dep}`, 'warning')
-    .then((value) => {
-      this.departamentoServices.updateDep(this.departamento.id_departamento, this.departamento)
-      .subscribe(
-        res =>{
-          swal('Perfecto','El departamento fue actualizado con exito','success');
-          this.router.navigate(['/departamentos']);
-        },
-        err=> console.error(err)
+  updateDep(departamento){
+
+     swal("Actualizar",`¿Esta seguro de actualizar? \n \n Departamento: ${departamento.nombre_departamento} \n Descripcion: ${departamento.descripcion_dep}`, 'warning')
+     .then((value) => {
+       this.departamentoServices.updateDep(this.params,departamento)
+       .subscribe(
+         res =>{
+           swal('Perfecto','El departamento fue actualizado con exito','success');
+           this.router.navigate(['/departamentos']);
+         },
+         err=> console.error(err)
       );
       
-    });
+     });
     
   }
 

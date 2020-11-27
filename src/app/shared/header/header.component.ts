@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-declare function init_plugins();
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,12 +9,11 @@ export class HeaderComponent implements OnInit {
   public user :any= JSON.parse(sessionStorage.getItem('user'));
   public rol : string;
   constructor() {
-    
 
    }
 
   ngOnInit() {
-    init_plugins();
+    
     this.getRol();
     console.log(this.rol);
   }

@@ -6,9 +6,9 @@
                 <h4 class="m-b-0 text-white">Salida de Empleados</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="#" [formGroup]='salidaForm' (submit)='submit()'>
                     <div class="form-body">
-                        <h3 class="card-title">Salida de Empleado Informacion</h3>
+                        <h3 class="card-title">Salida empleados Informacion</h3>
                         <hr>
                         
                         
@@ -16,25 +16,47 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Empleado</label>
-                                    <select class="form-control custom-select" name="id_empleado" [(ngModel)]='empleado.id_empleado'>
-                                        <option selected=true value="null">Seleccionar</option>
+                                    <select class="form-control custom-select" name="id_empleado" formControlName='id_empleado'>
+                                        <option selected=true value="">Seleccionar</option>
                                         <option *ngFor='let emp of query' [value]="emp.id_empleado">{{emp.nombres}}</option>
                                         
                                     </select>
+                                    <div *ngIf="id_empleado.invalid && (id_empleado.dirty || id_empleado.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="id_empleado.errors.required">
+                                            <small class="form-control-feedback">El empleado es requerido</small>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Descripción</label>
-                                    <input class="form-control" type='textarea' name="descripcion" [(ngModel)]='empleado.descripcion'>
+                                    <input class="form-control" type='textarea' name="descripcion" formControlName='descripcion'>
+                                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="descripcion.errors.required">
+                                            <small class="form-control-feedback"> La descripcion es requerida</small>
+                                        </div>
+                                        <div *ngIf="descripcion.errors.minlength">
+                                            <small class="form-control-feedback"> La descripcion debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="descripcion.errors.maxlength">
+                                            <small class="form-control-feedback">La descripcion debe tener menos de 30 caracteres.</small>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <!--/span-->
                         </div>
                     </div>
                     <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateSalEmp():saveSalEmp()'> <i class="fa fa-check"></i> Confirmar</button>
-                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                        <button type="submit" class="btn btn-success m-1" [disabled]='!salidaForm.valid'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse" (click)='cancelar()'>Cancelar</button>
                     </div>
                 </form>
             </div>

@@ -33,7 +33,7 @@ export class AggUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.gerRol();
-    console.log(this.user);
+  
     const params=this.activatedRouter.snapshot.params.id;
     if(params){
       this.getOne(params);
@@ -69,7 +69,7 @@ export class AggUsuarioComponent implements OnInit {
       .subscribe(
         res=>{
           this.usuario=res;
-          console.log(this.usuario);
+          
         },
         err=>console.error(err)
       );
@@ -78,7 +78,7 @@ export class AggUsuarioComponent implements OnInit {
     this.usuarioServices.getrol().subscribe(
       res=>{
         this.query = res;
-        console.log(this.query);
+       
       },
       err => console.error(err)
     )

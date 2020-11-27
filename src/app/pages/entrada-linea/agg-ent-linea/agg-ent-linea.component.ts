@@ -4,6 +4,7 @@ import {EmpleadosService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
 import {EntradaLinea} from '../../../Models/entradaLinea';
 import {Router,ActivatedRoute}  from '@angular/router';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-agg-ent-linea',
@@ -11,48 +12,59 @@ import swal from 'sweetalert';
   styles: []
 })
 export class AggEntLineaComponent implements OnInit {
-  public entradaLinea:any={
-    nro_orden:'',
-    id_linea:0,
-    id_lineaprod:0,
-    fecha:new Date,
-    cantidad:0,
-    id_empleado:0
-  };
-  public enviar:EntradaLinea={
-    nro_orden:'',
-    id_linea:0,
-    id_lineaprod:0,
-    fecha:new Date,
-    cantidad:0,
-    id_empleado:0,
-    id_user:0,
-    nombre_user:''
-  };
+  public entradaForm:FormGroup;
+  
+  
   public estado :boolean=false;
   public query1:any=[];
   public query2:any =[];
   public query3:any =[];
   public orden: string | number;
   public user:any ;
+  public params;
 constructor(private entradalineaService: EntradalineaService,private empleadosService:EmpleadosService,private lineaService:LineaService,private router:Router,
-  private activatedRouter:ActivatedRoute) { }
+  private activatedRouter:ActivatedRoute,private _fb:FormBuilder) { }
 
 ngOnInit() {
+  this.entradaForm=this._fb.group({
+    nro_orden:['',[Validators.required,Validators.minLength(4),Validators.maxLength(100)]],
+    id_linea:['',[Validators.required]],
+    id_lineaprod:['',[Validators.required]],
+    cantidad:['',[Validators.required,Validators.minLength(1),Validators.maxLength(11)]],
+    id_empleado:['',[Validators.required]],
+  });
   this.getListLinea();
   this.getListEmpleado();
   this.user= JSON.parse(sessionStorage.getItem('user'));
   
-  const params=this.activatedRouter.snapshot.params.id;
-  if(params){
-    this.getOne(params);
+  this.params=this.activatedRouter.snapshot.params.id;
+  if(this.params){
+    this.getOne(this.params);
     this.estado=true;
     
   }
   
 }
+get nro_orden(){return this.entradaForm.get('nro_orden');}
+get id_linea(){return this.entradaForm.get('id_linea');}
+get id_lineaprod(){return this.entradaForm.get('id_lineaprod');}
+get cantidad(){return this.entradaForm.get('cantidad');}
+get id_empleado(){return this.entradaForm.get('id_empleado');}
+submit(){
+  if(this.entradaForm.valid){
 
+    if(this.estado===true){
+      this.updateEntLinea(this.entradaForm.value);
+    }else{
+      this.saveEntLinea(this.entradaForm.value);
+    }
+  }
+  
+}
 
+cancelar(){
+  this.router.navigate(['/entradaLinea']);
+}
 
 getListLinea(){
   this.lineaService.getLinea()
@@ -83,23 +95,17 @@ getListProdprov(id:any){
     );
 }
 
-saveEntLinea(){
+saveEntLinea(entrada){
   swal("¿Esta seguro de crear la entrada de linea?")
   .then((value) => {
-    this.enviar.nro_orden= this.entradaLinea.nro_orden;
-    this.enviar.id_linea= this.entradaLinea.id_linea;
-    this.enviar.id_lineaprod= this.entradaLinea.id_lineaprod;
-    this.enviar.fecha= this.entradaLinea.fecha;
-    this.enviar.cantidad= this.entradaLinea.cantidad;
-    this.enviar.id_empleado= this.entradaLinea.id_empleado;
+    
 
-    this.enviar.id_user = this.user.id_usuario;
-    this.enviar.nombre_user= this.user.user;
-    this.entradalineaService.createEntLinea(this.enviar)
+    entrada.id_user = this.user.id_usuario;
+    entrada.nombre_user= this.user.user;
+    this.entradalineaService.createEntLinea(entrada)
     .subscribe(
       res=>{ 
         swal('Entrada de linea creado con exito!');
-        console.log(this.enviar);
         this.router.navigate(['/entradaLinea']);
       },
       err=> console.error(err)
@@ -114,9 +120,9 @@ getOne(id:number | string){
   this.entradalineaService.getOneEntLinea(id)
     .subscribe(
       res=>{
-        this.entradaLinea=res;
-        this.orden= this.entradaLinea.nro_orden;
-        let id = this.entradaLinea.id_linea;
+        this.entradaForm.patchValue(res);
+        
+        let id = this.entradaForm.value.id_linea;
          this.getListProdprov(id);
         
       },
@@ -124,21 +130,15 @@ getOne(id:number | string){
     );
 }
 
-updateEntLinea(){
+updateEntLinea(entrada){
 
   swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
     .then((value) => {
-      this.enviar.nro_orden= this.entradaLinea.nro_orden;
-      this.enviar.id_linea= this.entradaLinea.id_linea;
-      this.enviar.id_lineaprod= this.entradaLinea.id_lineaprod;
-      this.enviar.fecha= this.entradaLinea.fecha;
-      this.enviar.cantidad= this.entradaLinea.cantidad;
-      this.enviar.id_empleado= this.entradaLinea.id_empleado;
-      this.enviar.id_user = this.user.id_usuario;
-      this.enviar.nombre_user = this.user.user;
+      
+      entrada.id_user = this.user.id_usuario;
+      entrada.nombre_user = this.user.user;
   
-  console.log(this.enviar);
-      this.entradalineaService.updateEntLinea(this.orden, this.enviar)
+      this.entradalineaService.updateEntLinea(this.params, entrada)
               .subscribe(
                 res =>{
                 swal('Perfecto','La entrada de linea fue actualizado con exito','success');

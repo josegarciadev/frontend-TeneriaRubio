@@ -3,31 +3,49 @@ import {DepartamentosService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
 import {Linea} from '../../../Models/linea';
 import {Router,ActivatedRoute}  from '@angular/router';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 @Component({
   selector: 'app-agg-linea',
   templateUrl: './agg-linea.component.html',
   styles: []
 })
 export class AggLineaComponent implements OnInit {
-  public linea:Linea={
-    id_linea:0,
-    nombre_linea:'',
-    id_departamento: 0,
-    descripcion_linea:''
-  }
+  public lineaForm: FormGroup;
+  
   public query:any=[];
+  public params;
   public estado: boolean=false;
   constructor(private lineaService: LineaService,private departamentoServices: DepartamentosService, private router:Router,
-    private activatedRouter: ActivatedRoute) { }
+    private activatedRouter: ActivatedRoute,private _fb:FormBuilder) { }
 
   ngOnInit() {
+    this.lineaForm=this._fb.group({
+      nombre_linea:['',[Validators.required,Validators.minLength(4),Validators.maxLength(100)]],
+      id_departamento:['',[Validators.required]],
+      descripcion_linea:['',[Validators.required,Validators.minLength(4),Validators.maxLength(100)]]
+    });
     this.getListDep();
-    const params=this.activatedRouter.snapshot.params.id;
-    if(params){
-      this.getOne(params);
+    this.params=this.activatedRouter.snapshot.params.id;
+    if(this.params){
+      this.getOne(this.params);
       this.estado=true;
     }
     
+  }
+  get nombre_linea(){return this.lineaForm.get('nombre_linea');}
+  get id_departamento(){return this.lineaForm.get('id_departamento');}
+  get descripcion_linea(){return this.lineaForm.get('descripcion_linea');}
+  submit(){
+    if(this.lineaForm.valid){
+      if(this.estado===true){
+        this.updateLinea(this.lineaForm.value);
+      }else{
+        this.saveLinea(this.lineaForm.value);
+      }
+    }
+  }
+  cancelar(){
+    this.router.navigate(['/linea']);
   }
 
   getListDep(){
@@ -40,12 +58,10 @@ export class AggLineaComponent implements OnInit {
       );
   }
 
-  saveLinea(){
-    delete this.linea.id_linea;
-    delete this.linea.nombre_departamento;
-    delete this.linea.descripcion_dep;
+  saveLinea(linea){
+  
 
-    this.lineaService.createLinea(this.linea)
+    this.lineaService.createLinea(linea)
     .subscribe(
       res=>{
         this.router.navigate(['/linea']);
@@ -59,18 +75,17 @@ export class AggLineaComponent implements OnInit {
     this.lineaService.getOneLinea(id)
       .subscribe(
         res=>{
-          this.linea=res;
+          this.lineaForm.patchValue(res);
 
         },
         err=>console.error(err)
       );
   }
 
-  updateLinea(){
-    delete this.linea.nombre_departamento;
-    delete this.linea.descripcion_dep; 
+  updateLinea(linea){
+   
 
-    this.lineaService.updateLinea(this.linea.id_linea, this.linea)
+    this.lineaService.updateLinea(this.params, linea)
       .subscribe(
         res =>{
           this.router.navigate(['/linea']);

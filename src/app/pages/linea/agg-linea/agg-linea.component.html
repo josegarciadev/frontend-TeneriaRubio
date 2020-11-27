@@ -3,39 +3,78 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header bg-info">
-                <h4 class="m-b-0 text-white">Producto</h4>
+                <h4 class="m-b-0 text-white">Linea Producto</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="#" [formGroup]='lineaForm' (submit)='submit()'>
                     <div class="form-body">
-                        <h3 class="card-title">Informacion del producto</h3>
+                        <h3 class="card-title">Informacion de Linea producto</h3>
                         <hr>
                         <div class="row p-t-20">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Nombre de la linea</label>
-                                    <input type="text" name="codigo_producto" class="form-control" placeholder="#######" [(ngModel)]="linea.nombre_linea">
-                                    <small class="form-control-feedback"> Ingrese el codigo del producto</small> </div>
+                                    <input type="text" name="nombre_linea" class="form-control" placeholder="#######" formControlName='nombre_linea'>
+                                    <small class="form-control-feedback"> Ingrese el codigo del producto</small> 
+                                    <div *ngIf="nombre_linea.invalid && (nombre_linea.dirty || nombre_linea.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="nombre_linea.errors.required">
+                                        <small class="form-control-feedback"> El nombre es requerido</small>
+                                        </div>
+                                        <div *ngIf="nombre_linea.errors.minlength">
+                                        <small class="form-control-feedback">El nombre de orden debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="nombre_linea.errors.maxlength">
+                                        <small class="form-control-feedback">El nombre de orden debe tener menos de 100 caracteres.</small>
+                                        </div>
+                                
+                                    </div>
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Departamento</label>
-                                    <select class="form-control custom-select" name="unidad_medida" [(ngModel)]="linea.id_departamento">
-                                        <option selected value="null">Seleccionar</option>
+                                    <select class="form-control custom-select" name="id_departamento" formControlName='id_departamento'>
+                                        <option selected value="">Seleccionar</option>
                                         <option *ngFor='let dep of query' [value]="dep.id_departamento">{{dep.nombre_departamento}}</option>
                                     </select>
                                     
-                                    <small class="form-control-feedback"> Seleccione un departamento</small> </div>
+                                    <small class="form-control-feedback"> Seleccione un departamento</small>
+                                    <div *ngIf="id_departamento.invalid && (id_departamento.dirty || id_departamento.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="id_departamento.errors.required">
+                                        <small class="form-control-feedback"> El departamento es requerido</small>
+                                        </div>
+                                       
+                                
+                                    </div>
+                                 </div>
                             </div>
                             <!--/span-->
                         </div>
                         <div class="row p-t-20">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label class="control-label">Descripcion Linea</label>
-                                    <input type="textarea" name="descripcion_linea" class="form-control form-control-danger" placeholder="descripcion" [(ngModel)]="linea.descripcion_linea">
-                                    <small class="form-control-feedback"> Ingrese el nombre del producto </small> 
+                                    <label class="control-label">Descripción Linea</label>
+                                    <input type="textarea" name="descripcion_linea" class="form-control form-control-danger" placeholder="descripcion" formControlName="descripcion_linea">
+                                    <small class="form-control-feedback"> Ingrese una descripción sobre la linea</small> 
+                                    <div *ngIf="descripcion_linea.invalid && (descripcion_linea.dirty || descripcion_linea.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="descripcion_linea.errors.required">
+                                        <small class="form-control-feedback"> La descripción es requerida</small>
+                                        </div>
+                                        <div *ngIf="descripcion_linea.errors.minlength">
+                                        <small class="form-control-feedback">La descripción debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="descripcion_linea.errors.maxlength">
+                                        <small class="form-control-feedback">La descripción debe tener menos de 100 caracteres.</small>
+                                        </div>
+                                
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -43,8 +82,8 @@
                         </div>
                     </div>
                     <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateLinea():saveLinea()'> <i class="fa fa-check"></i> Confirmar</button>
-                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                        <button type="submit" class="btn btn-success m-1" [disabled]='!lineaForm.valid'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse" (click)='cancelar()'>Cancelar</button>
                     </div>
                 </form>
             </div>

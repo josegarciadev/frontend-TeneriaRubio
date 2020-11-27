@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">Departamento</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="#" [formGroup]="departamentoForm" (submit)='submit()'>
                     <div class="form-body">
                         <h3 class="card-title">Informacion del departamento</h3>
                         <hr>
@@ -14,22 +14,55 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Nombre</label>
-                                    <input type="text" name="nombre_departamento" class="form-control" placeholder="Sistemas" [(ngModel)]="departamento.nombre_departamento">
-                                    <small class="form-control-feedback"> Ingrese el nombre del departamento</small> </div>
+                                    <input type="text" class="form-control" placeholder="Sistemas" formControlName="nombre_departamento">
+                                    <small class="form-control-feedback">Ingrese el nombre del departamento</small> 
+                                    <div *ngIf="nombredepartamento.invalid && (nombredepartamento.dirty || nombredepartamento.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="nombredepartamento.errors.required">
+                                            <small class="form-control-feedback"> El nombre es requerido</small>
+                                        </div>
+                                        <div *ngIf="nombredepartamento.errors.minlength">
+                                            <small class="form-control-feedback"> El nombre debe contener mas de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="nombredepartamento.errors.maxlength">
+                                            <small class="form-control-feedback"> El nombre debe contener menos de 100 caracteres.</small>
+                                        </div>
+                                        
+                                        </div>
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Descripción</label>
-                                    <input type="textarea" name="descripcion_dep" class="form-control form-control-danger" placeholder="Descripcion del dep" [(ngModel)]="departamento.descripcion_dep">
-                                    <small class="form-control-feedback"> Ingrese la descripción del departamento </small> </div>
+                                    <input type="textarea" name="descripcion_dep" class="form-control form-control-danger" placeholder="Descripcion del dep" formControlName="descripcion_dep">
+                                    <small class="form-control-feedback"> Ingrese la descripción del departamento </small>
+                                    <div *ngIf="descripciondep.invalid && (descripciondep.dirty || descripciondep.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="descripciondep.errors.required">
+                                            <small class="form-control-feedback"> La descripción es requerido</small>
+                                        </div>
+                                        <div *ngIf="descripciondep.errors.minlength">
+                                            <small class="form-control-feedback"> La descripción debe contener mas de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="descripciondep.errors.maxlength">
+                                            <small class="form-control-feedback"> La descripción debe contener menos de 100 caracteres.</small>
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                </div>
+
+
                             </div>
                             <!--/span-->
                         </div>
                     </div>
                     <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateDep():saveDep()'> <i class="fa fa-check"></i> Confirmar</button>
-                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                        <button type="submit" class="btn btn-success m-1" [disabled]='!departamentoForm.valid'> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse" (click)='cancelar()'>Cancelar</button>
                     </div>
                 </form>
             </div>

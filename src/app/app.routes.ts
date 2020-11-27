@@ -6,7 +6,7 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import {AutenticarGuard} from './guards/autenticar.guard';
 
 const appRoutes: Routes =   [
-    {path: 'login', component: LoginComponent},
+    {path: 'login', component: LoginComponent,data:{titulo: 'Login', content: 'LOGIN'}},
     {path: '**', component: NopagefoundComponent}
 ];
 

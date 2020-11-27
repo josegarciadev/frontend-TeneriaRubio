@@ -3,6 +3,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common'
 import {NgxPaginationModule} from 'ngx-pagination'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -94,7 +95,7 @@ import {AdminrhRolGuard} from '../guards/adminrh-rol.guard';
         AlmacenComponent,
         EntSalComponent,
         UpdateComponent,
-        GetUsuariosComponent
+        GetUsuariosComponent,
     ],
     exports: [
         PagesComponent,
@@ -108,7 +109,8 @@ import {AdminrhRolGuard} from '../guards/adminrh-rol.guard';
         FormsModule,
         ChartsModule,
         CommonModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ReactiveFormsModule
     ],
     providers:[
         AutenticarGuard,

@@ -15,13 +15,173 @@
                         <li><a routerLink='/login' (click)='cerrar()'>Cerrar Sesión</a></li>
                     </ul>
                 </li>
+                
+                
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li *ngFor="let menu of menus">
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}} <span class="label label-rouded label-themecolor pull-right">{{menu.submenu.length}}</span></span></a>
+                <li >
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Principal </span></a>
+                    
                     <ul aria-expanded="false" class="collapse">
-                        <li *ngFor='let submenu of menu.submenu'><a routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{submenu.titulo}} </a></li>
-
+                        <li >
+                            <a routerLinkActive="active" routerLink='/dashboard'>Dashboard</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol ===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-direction"></i><span class="hide-menu">Departamentos </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addDepartamentos'>Agregar Departamentos</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/departamentos'>Ver Departamentos</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol ===4">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-user"></i><span class="hide-menu">Empleados </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addEmpleados'>Agregar Empleados</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/empleados'>Ver empleados</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li >
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-arrow-right"></i><span class="hide-menu">Entradas </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li *ngIf="user.rol ===3 || user.rol ===4" >
+                            <a routerLinkActive="active" routerLink='/addEntEmpl'>Agregar Entrada empleados</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===4 || user.rol ===2">
+                            <a routerLinkActive="active" routerLink='/entradaEmpleado'>Ver entrada empleados</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===1">
+                            <a routerLinkActive="active" routerLink='/addEntLinea'>Agregar entrada linea</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===1 || user.rol ===2">
+                            <a routerLinkActive="active" routerLink='/entradaLinea'>Ver entrada linea</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li >
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-arrow-left"></i><span class="hide-menu">Salidas </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li *ngIf="user.rol ===3 || user.rol ===4" >
+                            <a routerLinkActive="active" routerLink='/addSalEmpl'>Agregar Salida empleados</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===4 || user.rol ===2">
+                            <a routerLinkActive="active" routerLink='/salidaEmpleado'>Ver Salida empleados</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===1">
+                            <a routerLinkActive="active" routerLink='/addSalLinea'>Agregar Salida linea</a>
+                        </li>
+                        <li *ngIf="user.rol ===3 || user.rol ===1 || user.rol ===2">
+                            <a routerLinkActive="active" routerLink='/salidaLinea'>Ver Salida linea</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-direction-alt"></i><span class="hide-menu">Linea </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addlinea'>Agregar Linea</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/linea'>Ver Lineas</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-shopping-cart-full"></i><span class="hide-menu">Linea Producto</span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addLineaProd'>Agregar Linea Producto</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/lineaProd'>Ver Linea Producto</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-shopping-cart"></i><span class="hide-menu">Productos</span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addProd'>Agregar Producto</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/productos'>Ver Producto</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-truck"></i><span class="hide-menu">Producto Prov</span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addprodprovee'>Agregar Producto Proveedor</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/prodprovee'>Ver Producto Proveedor</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3 || user.rol===1">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-car"></i><span class="hide-menu">Proveedor</span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/addproveedor'>Agregar Proveedor</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/proveedor'>Ver Proveedor</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-user"></i><span class="hide-menu">Usuarios</span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/adduser'>Agregar Usuarios</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/usuarios'>Ver Usuarios</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li *ngIf="user.rol ===3">
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="ti-agenda"></i><span class="hide-menu">Auditorias </span></a>
+                    
+                    <ul aria-expanded="false" class="collapse">
+                        <li >
+                            <a routerLinkActive="active" routerLink='/auditoriasalm'>Auditorias almacen</a>
+                        </li>
+                        <li >
+                            <a routerLinkActive="active" routerLink='/auditoriasrh'>Auditorias Recursos H</a>
+                        </li>
+                        
                     </ul>
                 </li>
 

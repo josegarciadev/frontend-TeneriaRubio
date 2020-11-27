@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/services.index';
 import { UsuarioService } from '../../services/services.index';
-declare function init_plugins();
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   constructor(public sidebarService: SidebarService,private userSvc:UsuarioService) { }
   
   ngOnInit() {
-    init_plugins();
+   
     this.getMenu(this.user.rol);
     this.getRol();
     if(this.user != null){
@@ -25,10 +25,12 @@ export class SidebarComponent implements OnInit {
 
  
   getMenu(id){
+ 
     this.sidebarService.getMenu(id).subscribe(
+      
       res=>{
         var resp:any=res;
-        
+     
         
         for(let i=0; i < resp.length; i++){
           resp[i].submenu= JSON.parse(resp[i].submenu);

@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">Salida linea</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="#" [formGroup]="salidaForm" (submit)='submit()'>
                     <div class="form-body">
                         <h3 class="card-title">Informacion de Salida linea</h3>
                         <hr>
@@ -14,41 +14,87 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"># Orden</label>
-                                    <input type="textarea" name="nro_orden" class="form-control form-control-danger" placeholder="#####" [(ngModel)]="salida.nro_orden">
-                                    <small class="form-control-feedback"> Ingrese el numero de orden </small> 
+                                    <input type="textarea" name="nro_orden" class="form-control form-control-danger" placeholder="#####" formControlName="nro_orden">
+                                    <small class="form-control-feedback"> Ingrese el número de orden </small> 
+                                    <div *ngIf="nro_orden.invalid && (nro_orden.dirty || nro_orden.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="nro_orden.errors.required">
+                                            <small class="form-control-feedback"> El número de orden es requerido</small>
+                                        </div>
+                                        <div *ngIf="nro_orden.errors.minlength">
+                                            <small class="form-control-feedback">El número de orden debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="nro_orden.errors.maxlength">
+                                            <small class="form-control-feedback">El número de orden debe tener menos de 100 caracteres.</small>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
-                                
+                                 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Linea</label>
-                                    <select class="form-control custom-select" name="id_linea" [(ngModel)]="salida.id_linea"  (ngModelChange)='getListProdprov(salida.id_linea)'>
-                                        <option selected value="null">Seleccionar</option>
+                                    <select class="form-control custom-select" name="id_linea" formControlName="id_linea" (ngModelChange)='getListProdprov(salidaForm.value.id_linea)'>
+                                        <option selected value="">Seleccionar</option>
                                         <option *ngFor='let linea of query1' [value]="linea.id_linea">{{linea.nombre_linea}}</option>
                                     </select>
-                                    
                                     <small class="form-control-feedback"> Seleccione la linea</small> </div>
-                            </div>
+                                    <div *ngIf="id_linea.invalid && (id_linea.dirty || id_linea.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="id_linea.errors.required">
+                                            <small class="form-control-feedback"> La linea es requerida</small>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                </div>
                             <!--/span-->
                             
                         </div>
                         <div class="row p-t-20">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Producto Linea </label>
-                                    <select class="form-control custom-select" name="id_lineaprod" [(ngModel)]="salida.id_lineaprod" >
-                                        <option selected value="null">Seleccionar</option>
-                                        <option *ngFor='let lineaprod of query2' [value]="lineaprod.id_lineaprod" >{{lineaprod.nombre_producto+' | '+lineaprod.nombre_proveedor}}</option>
+                                    <label class="control-label">Producto Linea</label>
+                                    <select class="form-control custom-select" name="id_lineaprod" formControlName="id_lineaprod">
+                                        <option selected value="">Seleccionar</option>
+                                        <option *ngFor='let lineaprod of query2' [value]="lineaprod.id_lineaprod">{{lineaprod.nombre_producto+' | '+lineaprod.nombre_proveedor}}</option>
                                     </select>
                                     
-                                    <small class="form-control-feedback"> Estas son los productos existentes en la linea seleccionada</small> </div>
+                                    <small class="form-control-feedback"> Estas son los productos existentes en la linea seleccionada</small>
+                                    <div *ngIf="id_lineaprod.invalid && (id_lineaprod.dirty || id_lineaprod.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="id_lineaprod.errors.required">
+                                            <small class="form-control-feedback"> La linea producto es requerida</small>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Cantidad</label>
-                                    <input type="textarea" name="existencia" class="form-control form-control-danger" placeholder="descripcion" [(ngModel)]="salida.cantidad">
+                                    <input type="textarea" name="existencia" class="form-control form-control-danger"  formControlName="cantidad">
                                     <small class="form-control-feedback"> Ingrese la cantidad existente </small> 
+                                    <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="cantidad.errors.required">
+                                            <small class="form-control-feedback"> La cantidad es requerida</small>
+                                        </div>
+                                        <div *ngIf="cantidad.errors.minlength">
+                                            <small class="form-control-feedback">La cantidad debe tener más de 1 caracter.</small>
+                                        </div>
+                                        <div *ngIf="cantidad.errors.maxlength">
+                                            <small class="form-control-feedback">La cantidad de orden debe tener menos de 11 caracteres.</small>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -58,20 +104,30 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label class="control-label">Empleado</label>
-                                    <select class="form-control custom-select" name="id_empleado" [(ngModel)]="salida.id_empleado">
-                                        <option selected value="null">Seleccionar</option>
+                                    <select class="form-control custom-select" name="id_empleado" formControlName="id_empleado">
+                                        <option selected value="">Seleccionar</option>
                                         <option *ngFor='let emp of query3' [value]="emp.id_empleado">{{emp.nombres}}</option>
                                     </select>
                                     
-                                    <small class="form-control-feedback"> Estas son los productos existentes en la linea seleccionada</small> </div>
+                                    <small class="form-control-feedback"> Estas son los productos existentes en la linea seleccionada</small> 
+                                    <div *ngIf="id_empleado.invalid && (id_empleado.dirty || id_empleado.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="id_empleado.errors.required">
+                                            <small class="form-control-feedback"> El empleado es requerido</small>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                </div>
                             </div>
                            
                            
                         </div>
                     </div>
                     <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateSalLinea():saveSalLinea()'> <i class="fa fa-check"></i> Confirmar</button>
-                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                        <button type="submit" class="btn btn-success m-1" [disabled]="!salidaForm.valid"> <i class="fa fa-check" ></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse" (click)='cancelar()'>Cancelar</button>
                     </div>
                 </form>
             </div>

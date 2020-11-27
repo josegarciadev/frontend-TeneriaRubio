@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {DepartamentosService} from '../../services/services.index';
 import {Router} from '@angular/router';
+
 import swal from 'sweetalert';
 import * as printJS from 'print-js';
 
 
- 
 
 @Component({
   selector: 'app-departamentos',

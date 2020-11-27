@@ -3,6 +3,7 @@ import {EmpleadosService} from '../../../services/services.index';
 import {EntradaempleadosService} from '../../../services/services.index';
 import {EntradaEmpleado} from '../../../Models/entradaEmpleado';
 import {Router,ActivatedRoute}  from '@angular/router';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-agg-ent-emp',
@@ -10,51 +11,55 @@ import swal from 'sweetalert';
   styles: []
 })
 export class AggEntEmpComponent implements OnInit {
-  public empleado:any={
-    id_entrada: 0,
-    id_empleado: 0,
-    fecha_entrada:new Date,
-    descripcion:''
-  }
-  public enviar:EntradaEmpleado={
-    id_entrada: 0,
-    id_empleado: 0,
-    fecha_entrada: new Date,
-    descripcion:'',
-    id_user:0,
-    nombre_user:''
-  }
+  public entradaEmpForm : FormGroup;
+  
   public estado :boolean=false;
   public query:any=[];
+  public params;
   public user:any = JSON.parse(sessionStorage.getItem('user'));
 constructor(private empleadosServices: EmpleadosService,private router:Router, private entradaempleadosService:EntradaempleadosService,
-  private activatedRouter:ActivatedRoute) { }
+  private activatedRouter:ActivatedRoute, private _fb:FormBuilder) { }
 
 ngOnInit() {
+    this.entradaEmpForm=this._fb.group({
+    id_empleado: ['',[Validators.required]],
+    descripcion:['',[Validators.required,Validators.minLength(4),Validators.maxLength(30)]],
+  });
+
   this.getList();
-  const params=this.activatedRouter.snapshot.params.id;
-  if(params){
-    this.getOne(params);
+  this.params=this.activatedRouter.snapshot.params.id;
+  if(this.params){
+    this.getOne(this.params);
     this.estado=true;
   }
 }
 
-saveEntEmp(){
+get id_empleado(){return this.entradaEmpForm.get('id_empleado')}
+get descripcion(){return this.entradaEmpForm.get('descripcion')}
+submit(){
+  if(this.entradaEmpForm.valid){
+
+    if(this.estado===true){
+      this.updateEntEmp(this.entradaEmpForm.value);
+    }else{
+      this.saveEntEmp(this.entradaEmpForm.value);
+    }
+  }
+}
+
+cancelar(){
+  this.router.navigate(['/entradaEmpleado']);
+}
+saveEntEmp(entrada){
   swal("¿Esta seguro de crear la entrada de empleados?")
   .then((value) => {
-  delete this.enviar.id_entrada;
-  this.enviar.id_empleado= this.empleado.id_empleado;
-  this.enviar.fecha_entrada= this.empleado.fecha_entrada;
-  this.enviar.descripcion= this.empleado.descripcion;
-  console.log(this.enviar);
-
-    this.enviar.id_user = this.user.id_usuario;
-    this.enviar.nombre_user= this.user.user;
-    this.entradaempleadosService.createEntEmp(this.enviar)
+  
+    entrada.id_user = this.user.id_usuario;
+    entrada.nombre_user= this.user.user;
+    this.entradaempleadosService.createEntEmp(entrada)
     .subscribe(
       res=>{ 
         swal('Empleado creado con exito!');
-        console.log(this.empleado);
         this.router.navigate(['/entradaEmpleado']);
       },
       err=> console.error(err)
@@ -77,8 +82,7 @@ getOne(id:number | string){
   this.entradaempleadosService.getOneEntEmp(id)
     .subscribe(
       res=>{
-        this.empleado=res;
-        console.log(this.empleado);
+        this.entradaEmpForm.patchValue(res);
       },
       err=>console.error(err)
     );
@@ -86,20 +90,16 @@ getOne(id:number | string){
 
 
 
-updateEntEmp(){
+updateEntEmp(entrada){
 
   swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
     .then((value) => {
-      this.enviar.id_entrada= this.empleado.id_entrada;
-       this.enviar.id_empleado= this.empleado.id_empleado;
-      this.enviar.fecha_entrada= this.empleado.fecha_entrada;
-      this.enviar.descripcion= this.empleado.descripcion;
+     
       
-      this.enviar.id_user = this.user.id_usuario;
-      this.enviar.nombre_user = this.user.user;
+      entrada.id_user = this.user.id_usuario;
+      entrada.nombre_user = this.user.user;
   
-  console.log(this.empleado);
-      this.entradaempleadosService.updateEntEmp(this.enviar.id_entrada, this.enviar)
+      this.entradaempleadosService.updateEntEmp(this.params, entrada)
               .subscribe(
                 res =>{
                 swal('Perfecto','La Entrada del empleado fue actualizado con exito','success');

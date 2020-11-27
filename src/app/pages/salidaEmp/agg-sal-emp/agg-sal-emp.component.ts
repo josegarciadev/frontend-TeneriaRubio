@@ -3,6 +3,7 @@ import {EmpleadosService} from '../../../services/services.index';
 import {SalidaempleadoService} from '../../../services/services.index';
 import {SalidaEmpleado} from '../../../Models/salidaEmpleado';
 import {Router,ActivatedRoute}  from '@angular/router';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-agg-sal-emp',
@@ -10,52 +11,55 @@ import swal from 'sweetalert';
   styles: []
 })
 export class AggSalEmpComponent implements OnInit {
-  public empleado:any={
-    id_salida: 0,
-    id_empleado: 0,
-    fecha_salida:new Date,
-    descripcion:''
-  }
-  public enviar:SalidaEmpleado={
-    id_salida: 0,
-    id_empleado: 0,
-    fecha_salida: new Date,
-    descripcion:'',
-    id_user:0,
-    nombre_user:''
-  }
+  public salidaForm : FormGroup;
+  
   public estado :boolean=false;
   public query:any=[];
+  public params;
   public user:any = JSON.parse(sessionStorage.getItem('user'));
 
 constructor(private empleadosServices: EmpleadosService,private router:Router, private salidaempleadoService:SalidaempleadoService,
-  private activatedRouter:ActivatedRoute) { }
+  private activatedRouter:ActivatedRoute,private _fb:FormBuilder) { }
 
 ngOnInit() {
+  this.salidaForm=this._fb.group({
+    id_empleado: ['',[Validators.required]],
+    descripcion:['',[Validators.required,Validators.minLength(4),Validators.maxLength(30)]],
+  });
+
   this.getList();
-  const params=this.activatedRouter.snapshot.params.id;
-  if(params){
-    this.getOne(params);
+  this.params=this.activatedRouter.snapshot.params.id;
+  if(this.params){
+    this.getOne(this.params);
     this.estado=true;
   }
 }
 
-saveSalEmp(){
+get id_empleado(){return this.salidaForm.get('id_empleado')}
+get descripcion(){return this.salidaForm.get('descripcion')}
+submit(){
+  if(this.salidaForm.valid){
+
+    if(this.estado===true){
+      this.updateSalEmp(this.salidaForm.value);
+    }else{
+      this.saveSalEmp(this.salidaForm.value);
+    }
+  }
+}
+cancelar(){
+  this.router.navigate(['/salidaEmpleado']);
+}
+saveSalEmp(salida){
   swal("¿Esta seguro de crear la salida de empleados?")
   .then((value) => {
-  delete this.enviar.id_salida;
-  this.enviar.id_empleado= this.empleado.id_empleado;
-  this.enviar.fecha_salida= this.empleado.fecha_salida;
-  this.enviar.descripcion= this.empleado.descripcion;
-  console.log(this.enviar);
-
-    this.enviar.id_user = this.user.id_usuario;
-    this.enviar.nombre_user= this.user.user;
-    this.salidaempleadoService.createSalEmp(this.enviar)
+  
+    salida.id_user = this.user.id_usuario;
+    salida.nombre_user= this.user.user;
+    this.salidaempleadoService.createSalEmp(salida)
     .subscribe(
       res=>{ 
         swal('Empleado creado con exito!');
-        console.log(this.empleado);
         this.router.navigate(['/salidaEmpleado']);
       },
       err=> console.error(err)
@@ -80,27 +84,23 @@ getOne(id:number | string){
   this.salidaempleadoService.getOneSalEmp(id)
     .subscribe(
       res=>{
-        this.empleado=res;
-        console.log(this.empleado);
+        this.salidaForm.patchValue(res);
       },
       err=>console.error(err)
     );
 }
 
 
-updateSalEmp(){
+updateSalEmp(salida){
 
   swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
     .then((value) => {
-      this.enviar.id_salida= this.empleado.id_salida;
-       this.enviar.id_empleado= this.empleado.id_empleado;
-      this.enviar.fecha_salida= this.empleado.fecha_salida;
-      this.enviar.descripcion= this.empleado.descripcion;
+     
       
-      this.enviar.id_user = this.user.id_usuario;
-      this.enviar.nombre_user = this.user.user;
+     salida.id_user = this.user.id_usuario;
+     salida.nombre_user = this.user.user;
   
-      this.salidaempleadoService.updateSalEmp(this.enviar.id_salida, this.enviar)
+      this.salidaempleadoService.updateSalEmp(this.params,salida)
               .subscribe(
                 res =>{
                 swal('Perfecto','La Salida del empleado fue actualizado con exito','success');

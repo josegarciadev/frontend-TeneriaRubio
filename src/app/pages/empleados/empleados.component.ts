@@ -41,7 +41,7 @@ export class EmpleadosComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    console.log('hora '+this.hora);
+    
   }
 
   getList(){

@@ -24,7 +24,7 @@ export class UsuarioComponent implements OnInit {
   public user:any = JSON.parse(sessionStorage.getItem('user'));
   ngOnInit() {
     this.getList();
-    console.log(this.fecha); 
+    
   }
 
   getList(){
@@ -38,17 +38,7 @@ export class UsuarioComponent implements OnInit {
     )
   }
 
-  deleteEmp(id:number | string){
-    this.usuarioServices.deleteUser(id)
-          .subscribe(
-            res=>{
-              console.log(res);
-              this.getList();
-            },
-            err=>console.error(err)
-          );
-  }
-
+ 
   deleteUser(id:number | string){
     swal("Eliminar","¿Esta seguro de eliminar la salida de linea?",'warning')
       .then((value) => {
@@ -59,7 +49,7 @@ export class UsuarioComponent implements OnInit {
         this.usuarioServices.deleteUser(JSON.stringify(this.enviar))
           .subscribe(
             res=>{
-              console.log(res);
+              
               this.getList();
             },
             err=>console.error(err)

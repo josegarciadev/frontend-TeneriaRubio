@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Usuario} from '../../Models/usuario';
 import { Router} from '@angular/router';
@@ -6,13 +6,20 @@ import swal from 'sweetalert';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuarioService implements OnInit{
   public API_URL= 'http://localhost:3000/api';
   public log =false;
   public usuario:Usuario;
-  constructor(private http: HttpClient,private router:Router) { }
+   //
+  constructor(private http: HttpClient,private router:Router) {
+
+   }
  
-  
+   ngOnInit(){
+    // if(this.sesion){
+    //   console.log('existe');
+    // }
+  }
   getUser(){
     return this.http.get(`${this.API_URL}/usuarios`);
   }
@@ -20,9 +27,10 @@ export class UsuarioService {
     return this.http.post(`${this.API_URL}/usuarios/login/`,user).subscribe(
       res=>{
         const resp:any = res;
-        if(resp.message == false){
-          console.log(resp);
+        if(resp.message === false){
           swal('Error','Credenciales invalidas','error');
+        }else if(resp.message === 'bad user'){
+          swal('Error','El usuario no existe','error');
         }else{
           
           if(resp.status== 'A' || resp.status== 'a'){
@@ -46,7 +54,9 @@ export class UsuarioService {
         if(resp.message=true){
           sessionStorage.removeItem('user');
           this.log=false;
+          this.router.navigate(['/login']);
           swal('Excelente','Gracias por usar nuestro servicio.','success');
+          
         }
         
       },
