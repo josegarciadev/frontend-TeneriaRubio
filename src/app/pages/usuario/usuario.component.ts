@@ -8,9 +8,11 @@ import * as printJS from 'print-js';
   styles: []
 })
 export class UsuarioComponent implements OnInit {
+  public usuario:any;
   public query :any =[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private usuarioServices: UsuarioService) {
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
    }
@@ -27,6 +29,37 @@ export class UsuarioComponent implements OnInit {
     
   }
 
+  getOne(id:number | string){
+
+    this.usuarioServices.getOneUser(id)
+      .subscribe(
+        res=>{
+          this.usuario=res;
+          swal({
+            title:`Sobre Mi `,
+            text:`
+            Cedula: ${this.usuario.cedula}\n
+            Nombres: ${this.usuario.nombre}\n
+            Apellidos: ${this.usuario.apellido}\n
+            Telefono: ${this.usuario.telefono}\n
+            Fecha de registro: ${this.usuario.fecha_registro}\n
+            Email: ${this.usuario.correo_elec}\n
+            Usuario: ${this.usuario.user}\n
+            Contraseña: ${this.usuario.pass}\n
+            Dirección: ${this.usuario.direccion}\n
+            Status: ${this.usuario.status}\n
+            Rol: ${this.usuario.nombre_rol}\n
+            `,
+            icon:'info',
+            
+          });
+          
+          console.log(this.usuario);
+        },
+        err=>console.error(err)
+      );
+    }
+
   getList(){
     this.usuarioServices.getUser().subscribe(
       res =>{
@@ -40,20 +73,34 @@ export class UsuarioComponent implements OnInit {
 
  
   deleteUser(id:number | string){
-    swal("Eliminar","¿Esta seguro de eliminar la salida de linea?",'warning')
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar el usuario?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
       .then((value) => {
-        this.enviar.id_user = this.user.id_usuario;
-        this.enviar.id = id;
-        this.enviar.nombre_user= this.user.user;
-        console.log(this.enviar);
-        this.usuarioServices.deleteUser(JSON.stringify(this.enviar))
-          .subscribe(
-            res=>{
-              
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+        if(value==='confirmar'){
+          this.enviar.id_user = this.user.id_usuario;
+          this.enviar.id = id;
+          this.enviar.nombre_user= this.user.user;
+          this.usuarioServices.deleteUser(JSON.stringify(this.enviar))
+            .subscribe(
+              res=>{
+                swal('Perfecto','El usuario fue eliminado con exito','success');
+                this.getList();
+              },
+              err=>console.error(err)
+            );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
         
       });
   }

@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">Usuarios</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="#" [formGroup]='formUser' (submit)='submit()'>
                     <div class="form-body">
                         <h3 class="card-title">Usuario Informacion</h3>
                         <hr>
@@ -14,15 +14,46 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Cedula</label>
-                                    <input type="text"  class="form-control" placeholder="111111111" name="cedula" [(ngModel)]='usuario.cedula'>
-                                    <small class="form-control-feedback"> Solo Numeros </small> </div>
+                                    <input type="text"  class="form-control" placeholder="111111111" name="cedula" formControlName="cedula">
+                                    <small class="form-control-feedback"> Solo Numeros </small> 
+                                    <div *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)"
+                                            class="alert alert-danger">
+
+                                        <div *ngIf="cedula.errors.required">
+                                            <small class="form-control-feedback"> La cedula es requerida</small>
+                                        </div>
+                                        <div *ngIf="cedula.errors.minlength">
+                                            <small class="form-control-feedback">La cedula debe tener más de 6 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="cedula.errors.maxlength">
+                                            <small class="form-control-feedback">La cedula debe tener menos de 11 caracteres.</small>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group ">
                                     <label class="control-label">Nombres</label>
-                                    <input type="text" class="form-control form-control-danger" placeholder="Pedro" name="nombres" [(ngModel)]='usuario.nombre'>
-                                    <small class="form-control-feedback"> Ingreses su nombre completo </small> </div>
+                                    <input type="text" class="form-control form-control-danger" placeholder="Pedro" name="nombres" formControlName="nombre">
+                                    <small class="form-control-feedback"> Ingrese su nombre completo </small>
+                                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="nombre.errors.required">
+                                            <small class="form-control-feedback"> El nombre es requerido</small>
+                                        </div>
+                                        <div *ngIf="nombre.errors.minlength">
+                                            <small class="form-control-feedback"> El nombre debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="nombre.errors.maxlength">
+                                            <small class="form-control-feedback"> El nombre debe tener menos de 30 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
+                                
+                                </div>
                             </div>
                             <!--/span-->
                         </div>
@@ -30,15 +61,47 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Apellidos</label>
-                                    <input type="text"  class="form-control" placeholder="Perez " name="apellidos" [(ngModel)]='usuario.apellido'>
-                                    <small class="form-control-feedback"> Ingrese sus apellidos </small> </div>
+                                    <input type="text"  class="form-control" placeholder="Perez " name="apellidos" formControlName="apellido">
+                                    <small class="form-control-feedback"> Ingrese sus apellidos </small> 
+                                    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="apellido.errors.required">
+                                            <small class="form-control-feedback"> El apellido es requerido</small>
+                                        </div>
+                                        <div *ngIf="apellido.errors.minlength">
+                                            <small class="form-control-feedback"> El apellido debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="apellido.errors.maxlength">
+                                            <small class="form-control-feedback"> El apellido debe tener menos de 30 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
+                                
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group ">
                                     <label class="control-label">Telefono</label>
-                                    <input type="text"  class="form-control form-control-danger" placeholder="99999999999" name="telefono" [(ngModel)]='usuario.telefono'>
-                                    <small class="form-control-feedback"> Ingrese su numero telefonico </small> </div>
+                                    <input type="text"  class="form-control form-control-danger" placeholder="99999999999" name="telefono" formControlName="telefono">
+                                    <small class="form-control-feedback"> Ingrese su numero telefonico </small> 
+                                    <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="telefono.errors.required">
+                                            <small class="form-control-feedback"> El telefono es requerido</small>
+                                        </div>
+                                        <div *ngIf="telefono.errors.minlength">
+                                            <small class="form-control-feedback"> El telefono debe tener más de 6 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="telefono.errors.maxlength">
+                                            <small class="form-control-feedback"> El telefono debe tener menos de 11 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
+                                
+                                </div>
                             </div>
                             <!--/span-->
                         </div>
@@ -46,15 +109,49 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Correo electronico</label>
-                                    <input type="email"  class="form-control" placeholder="ejemplo@ejemplo.com" name="correo_elect" [(ngModel)]='usuario.correo_elec'>
-                                    <small class="form-control-feedback"> Ingrese un correo electronico valido </small> </div>
+                                    <input type="email"  class="form-control" placeholder="ejemplo@ejemplo.com" name="correo_elect" formControlName="correo_elec">
+                                    <small class="form-control-feedback"> Ingrese un correo electronico valido </small> 
+                                    <div *ngIf="correo_elec.invalid && (correo_elec.dirty || correo_elec.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="correo_elec.errors.required">
+                                            <small class="form-control-feedback"> El email es requerido</small>
+                                        </div>
+                                        <div *ngIf="correo_elec.errors.minlength">
+                                            <small class="form-control-feedback"> El email debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="correo_elec.errors.maxlength">
+                                            <small class="form-control-feedback"> El email debe tener menos de 100 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="correo_elec.errors.email">
+                                            <small class="form-control-feedback"> El email no es valido: ejempleo@test.com</small>
+                                        </div>
+                                        
+                                    </div> 
+                                
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group ">
                                     <label class="control-label">Dirección</label>
-                                    <input type="textarea"  class="form-control form-control-danger"  name="direccion" [(ngModel)]='usuario.direccion'>
-                                    <small class="form-control-feedback"> Ingrese su dirección actual</small> </div>
+                                    <input type="textarea"  class="form-control form-control-danger"  name="direccion" formControlName="direccion">
+                                    <small class="form-control-feedback"> Ingrese su dirección actual</small> 
+                                    <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="direccion.errors.required">
+                                            <small class="form-control-feedback"> La dirección es requerida</small>
+                                        </div>
+                                        <div *ngIf="direccion.errors.minlength">
+                                            <small class="form-control-feedback"> La dirección debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="direccion.errors.maxlength">
+                                            <small class="form-control-feedback"> La dirección debe tener menos de 100 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
+                                </div>
                             </div>
                             <!--/span-->
                         </div>
@@ -63,18 +160,39 @@
                             <div class="col-md-6">
                                 <div class="form-group has-success">
                                     <label class="control-label">Status</label>
-                                    <select class="form-control custom-select" name="status" [(ngModel)]='usuario.status'>
-                                        <option selected value="null">Seleccionar</option>
+                                    <select class="form-control custom-select" name="status" formControlName="status">
+                                        <option selected value="">Seleccionar</option>
                                         <option value="A">Activo</option>
                                         <option value="I">Inactivo</option>
                                     </select>
-                                    <small class="form-control-feedback"> Selecione su Status </small> </div>
+                                    <small class="form-control-feedback"> Selecione su Status </small> 
+                                    <div *ngIf="status.invalid && (status.dirty || status.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="status.errors.required">
+                                            <small class="form-control-feedback"> El status es requerido</small>
+                                        </div>
+     
+                                    </div> 
+                                </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Foto</label>
-                                    <input type="text" class="form-control"  name="foto" [(ngModel)]="usuario.foto" >
+                                    <label class="control-label">Rol</label>
+                                    <select class="form-control custom-select" name="id_empleado" formControlName="rol">
+                                        <option selected=true value="">Seleccionar</option>
+                                        <option *ngFor='let rol of query' [value]="rol.id_rol">{{rol.nombre}}</option>
+                                        
+                                    </select>
+                                    <div *ngIf="rol.invalid && (rol.dirty || rol.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="rol.errors.required">
+                                            <small class="form-control-feedback"> El rol es requerido</small>
+                                        </div>
+     
+                                    </div> 
                                 </div>
                             </div>
                             <!--/span-->
@@ -84,35 +202,53 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Usuario</label>
-                                    <input class="form-control" type='text' name="user" [(ngModel)]='usuario.user'>
+                                    <input class="form-control" type='text' name="user" formControlName="user">
+                                    <div *ngIf="users.invalid && (users.dirty || users.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="users.errors.required">
+                                            <small class="form-control-feedback"> El usuario es requerido</small>
+                                        </div>
+                                        <div *ngIf="users.errors.minlength">
+                                            <small class="form-control-feedback"> El usuario debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="users.errors.maxlength">
+                                            <small class="form-control-feedback">El usuario debe tener menos de 30 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Contraseña</label>
-                                    <input class="form-control" type='password' name="pass" [(ngModel)]='usuario.pass'>
+                                    <input class="form-control" type='password' name="pass" formControlName="pass">
+
+                                    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+                                    class="alert alert-danger">
+
+                                        <div *ngIf="pass.errors.required">
+                                            <small class="form-control-feedback">La contraseña es requerida</small>
+                                        </div>
+                                        <div *ngIf="pass.errors.minlength">
+                                            <small class="form-control-feedback">La contraseña debe tener más de 4 caracteres.</small>
+                                        </div>
+                                        <div *ngIf="pass.errors.maxlength">
+                                            <small class="form-control-feedback">La contraseña debe tener menos de 30 caracteres.</small>
+                                        </div>
+                                        
+                                    </div> 
                                 </div>
                             </div>
                             <!--/span-->
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label class="control-label">Rol</label>
-                                    <select class="form-control custom-select" name="id_empleado" [(ngModel)]='usuario.rol'>
-                                        <option selected=true value="null">Seleccionar</option>
-                                        <option *ngFor='let rol of query' [value]="rol.id_rol">{{rol.nombre}}</option>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        
                        
                     </div>
                     <div class="form-actions text-center">
-                        <button type="submit" class="btn btn-success m-1" (click)='estado ? updateUser():saveUser()'> <i class="fa fa-check"></i> Confirmar</button>
-                        <button type="reset" class="btn btn-inverse">Cancelar</button>
+                        <button type="submit" class="btn btn-success m-1" [disabled]="!formUser.valid"> <i class="fa fa-check"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-inverse" (click)='cancelar()'>Cancelar</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProdproveeService} from '../../../services/services.index';
-import {Prodprov} from '../../../Models/prodprov';
+import swal from 'sweetalert';
 import {Router,ActivatedRoute}  from '@angular/router';
 import {ProductoService} from '../../../services/services.index';
 import {ProveedorService} from '../../../services/services.index';
@@ -73,16 +73,34 @@ export class AggProdprovComponent implements OnInit {
 
 
     saveProdprov(prodprov){
-      
-  
-      this.prodprovServices.createProdprov(prodprov)
-      .subscribe(
-        res=>{
-          this.router.navigate(['/prodprovee']);
+      swal({
+        title:'Agregar',
+        text: '¿Seguro de agregar el producto proveedor?',
+        icon:'warning',
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+        buttons: {
+          cancelar: {text:'Cancelar',className:'sweet-warning'},
+          confirmar: {text:'Confirmar',className:'sweet-success'},
         },
-        err=> console.error(err)
-      );
-      
+      })
+        .then((value) => {
+          if(value==='confirmar'){
+            this.prodprovServices.createProdprov(prodprov)
+            .subscribe(
+              res=>{
+                this.router.navigate(['/prodprovee']);
+                swal('Perfecto','El producto proveedor fue agregado con exito','success');
+              },
+              err=> console.error(err)
+            );
+          }
+          if(value==='cancelar'){
+            swal.close();
+          }
+          
+        });
+  
     }
   
     getOne(id:number | string){
@@ -97,13 +115,36 @@ export class AggProdprovComponent implements OnInit {
     }
   
     updateProdprov(prodprov){
-      this.prodprovServices.updateProdprov(this.params,prodprov)
-        .subscribe(
-          res =>{
-            this.router.navigate(['/prodprovee']);
-          },
-          err=> console.error(err)
-        );
+
+      swal({
+        title:'actualizar',
+        text: '¿Seguro de actualizar el producto proveedor?',
+        icon:'warning',
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+        buttons: {
+          cancelar: {text:'Cancelar',className:'sweet-warning'},
+          confirmar: {text:'Confirmar',className:'sweet-success'},
+        },
+      })
+        .then((value) => {
+          if(value==='confirmar'){
+            this.prodprovServices.updateProdprov(this.params,prodprov)
+              .subscribe(
+                res =>{
+                  this.router.navigate(['/prodprovee']);
+                  swal('Perfecto','El producto proveedor fue actualizado con exito','success');
+                },
+                err=> console.error(err)
+              );
+          }
+          if(value==='cancelar'){
+            swal.close();
+          }
+          
+        });
+
+      
     }
   
 

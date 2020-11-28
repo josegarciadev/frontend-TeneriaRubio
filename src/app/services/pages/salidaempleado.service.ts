@@ -14,7 +14,10 @@ export class SalidaempleadoService {
   }
 
   getOneSalEmp(id:number | string){
-    return this.http.get(`${this.API_URL}/salEmp/${id}`);
+    return this.http.get(`${this.API_URL}/salEmp/getone/${id}`);
+  }
+  getSalida(){
+    return this.http.get(`${this.API_URL}/salEmp/salidas`);
   }
 
   createSalEmp(emp: SalidaEmpleado){

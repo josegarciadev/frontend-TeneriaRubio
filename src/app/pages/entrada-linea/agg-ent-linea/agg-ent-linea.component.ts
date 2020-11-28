@@ -96,21 +96,33 @@ getListProdprov(id:any){
 }
 
 saveEntLinea(entrada){
-  swal("¿Esta seguro de crear la entrada de linea?")
+  swal({
+    title:'Agregar',
+    text: '¿Seguro de agregar la entrada de linea?',
+    icon:'warning',
+    closeOnClickOutside: false,
+    closeOnEsc: false,
+    buttons: {
+      cancelar: {text:'Cancelar',className:'sweet-warning'},
+      confirmar: {text:'Confirmar',className:'sweet-success'},
+    },
+  })
   .then((value) => {
-    
-
-    entrada.id_user = this.user.id_usuario;
-    entrada.nombre_user= this.user.user;
-    this.entradalineaService.createEntLinea(entrada)
-    .subscribe(
-      res=>{ 
-        swal('Entrada de linea creado con exito!');
-        this.router.navigate(['/entradaLinea']);
-      },
-      err=> console.error(err)
-    );
-   
+    if(value==='confirmar'){
+      entrada.id_user = this.user.id_usuario;
+      entrada.nombre_user= this.user.user;
+      this.entradalineaService.createEntLinea(entrada)
+      .subscribe(
+        res=>{ 
+          swal('Entrada de linea creado con exito!');
+          this.router.navigate(['/entradaLinea']);
+        },
+        err=> console.error(err)
+      );
+    }
+    if(value==='cancelar'){
+      swal.close();
+    }
   });
       
 }
@@ -132,20 +144,35 @@ getOne(id:number | string){
 
 updateEntLinea(entrada){
 
-  swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
+  swal({
+    title:'Actualizar',
+    text: '¿Seguro de actualizar la entrada de linea?',
+    icon:'warning',
+    closeOnClickOutside: false,
+    closeOnEsc: false,
+    buttons: {
+      cancelar: {text:'Cancelar',className:'sweet-warning'},
+      confirmar: {text:'Confirmar',className:'sweet-success'},
+    },
+  })
     .then((value) => {
+      if(value==='confirmar'){
+        entrada.id_user = this.user.id_usuario;
+          entrada.nombre_user = this.user.user;
       
-      entrada.id_user = this.user.id_usuario;
-      entrada.nombre_user = this.user.user;
-  
-      this.entradalineaService.updateEntLinea(this.params, entrada)
-              .subscribe(
-                res =>{
-                swal('Perfecto','La entrada de linea fue actualizado con exito','success');
-                this.router.navigate(['/entradaLinea']);
-                console.log(res);},
-               err=> console.error(err)
-    );
+          this.entradalineaService.updateEntLinea(this.params, entrada)
+                  .subscribe(
+                    res =>{
+                    swal('Perfecto','La entrada de linea fue actualizado con exito','success');
+                    this.router.navigate(['/entradaLinea']);
+                    console.log(res);},
+                  err=> console.error(err)
+        );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
     });
   }
 

@@ -63,21 +63,35 @@ export class AggEmpComponent implements OnInit {
     this.router.navigate(['/empleados']);
   }
   saveEmp(empleado){
-    swal("¿Esta seguro de crear la entrada de linea?")
+    swal({
+      title:'Agregar',
+      text: '¿Seguro de agregar el empleado?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
     .then((value) => {
+      if(value==='confirmar'){
+        empleado.id_user = this.user.id_usuario;
+        empleado.nombre_user= this.user.user;
+        console.log('save',empleado);
+        this.empleadosServices.createEmp(empleado)
+        .subscribe(
+          res=>{ 
+            swal('Empleado creado con exito!');
+            this.router.navigate(['/empleados']);
+          },
+          err=> console.error(err)
+        );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
       
-      
-      empleado.id_user = this.user.id_usuario;
-      empleado.nombre_user= this.user.user;
-      console.log('save',empleado);
-      this.empleadosServices.createEmp(empleado)
-      .subscribe(
-        res=>{ 
-          swal('Empleado creado con exito!');
-          this.router.navigate(['/empleados']);
-        },
-        err=> console.error(err)
-      );
      
     });
         
@@ -106,20 +120,35 @@ export class AggEmpComponent implements OnInit {
   }
   updateEmp(empleado){
 
-    swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
+    swal({
+      title:'Actualizar',
+      text: '¿Seguro de actualizar el empleado?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
       .then((value) => {
-       
-        empleado.id_user = this.user.id_usuario;
-        empleado.nombre_user = this.user.user;
-    
-        this.empleadosServices.updateEmp(this.params, empleado)
-                .subscribe(
-                  res =>{
-                  swal('Perfecto','El empleado fue actualizado con exito','success');
-                  this.router.navigate(['/empleados']);
-                  console.log(res);},
-                 err=> console.error(err)
-      );
+        if(value==='confirmar'){
+          empleado.id_user = this.user.id_usuario;
+            empleado.nombre_user = this.user.user;
+        
+            this.empleadosServices.updateEmp(this.params, empleado)
+                    .subscribe(
+                      res =>{
+                      swal('Perfecto','El empleado fue actualizado con exito','success');
+                      this.router.navigate(['/empleados']);
+                      console.log(res);},
+                    err=> console.error(err)
+          );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
       });
     }
   

@@ -70,6 +70,9 @@ export class UsuarioService implements OnInit{
   getOneUser(id:number | string){
     return this.http.get(`${this.API_URL}/usuarios/getone/${id}`);
   }
+  getUsuarios(){
+    return this.http.get(`${this.API_URL}/usuarios/usuario`);
+  }
   
 
   createUser(user: Usuario){

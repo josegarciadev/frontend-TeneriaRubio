@@ -3,7 +3,7 @@ import {ProdproveeService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
 import {LineaProdService} from '../../../services/services.index';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
-
+import swal from 'sweetalert';
 import {Router,ActivatedRoute}  from '@angular/router';
 @Component({
   selector: 'app-agg-linea-prod',
@@ -76,15 +76,35 @@ export class AggLineaProdComponent implements OnInit {
   }
 
   saveLineaprod(lineaprod){
-   
-
-    this.lineaprodService.createLineaProd(lineaprod)
-    .subscribe(
-      res=>{
-        this.router.navigate(['/lineaProd']);
+    swal({
+      title:'Agregar',
+      text: '¿Seguro de agregar la linea Producto?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
       },
-      err=> console.error(err)
-    );
+    })
+    .then((value) => {
+      if(value==='confirmar'){
+        this.lineaprodService.createLineaProd(lineaprod)
+          .subscribe(
+            res=>{
+              this.router.navigate(['/lineaProd']);
+            },
+            err=> console.error(err)
+          );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
+     
+    });
+
+    
     
   }
 
@@ -100,14 +120,35 @@ export class AggLineaProdComponent implements OnInit {
   }
 
   updateLineaprod(lineaprod){
+    swal({
+      title:'Actualizar',
+      text: '¿Seguro de actualizar la linea Producto?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+    .then((value) => {
+      if(value==='confirmar'){
+        this.lineaprodService.updateLineaProd(this.params,lineaprod)
+          .subscribe(
+            res =>{
+              this.router.navigate(['/lineaProd']);
+            },
+            err=> console.error(err)
+          );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
+     
+    });
     
   
-    this.lineaprodService.updateLineaProd(this.params,lineaprod)
-      .subscribe(
-        res =>{
-          this.router.navigate(['/lineaProd']);
-        },
-        err=> console.error(err)
-      );
+    
   }
 }

@@ -7,10 +7,18 @@
 }
 
 .swal-overlay {
-    background-color: rgba(43, 165, 137, 0.45);
+    background-color: rgba(15, 15, 15, 0.233);
   }
 
 
 .rol{
     font-size: 25px;
+}
+.sweet-success{
+    background: #34626c;
+    color:white;
+}
+.sweet-warning{
+    background: #c05555;
+    color:white;
 }

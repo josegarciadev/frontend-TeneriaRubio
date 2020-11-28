@@ -18,6 +18,7 @@ export class EntradaLineaComponent implements OnInit {
   public user:any = JSON.parse(sessionStorage.getItem('user'));
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private entradalineaService:EntradalineaService, private router: Router) {
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
    }
@@ -38,19 +39,34 @@ export class EntradaLineaComponent implements OnInit {
   }
 
   deleteEntLinea(id:number | string){
-    swal("Eliminar","¿Esta seguro de eliminar la entrada de linea?",'warning')
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar la entrada de linea?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
       .then((value) => {
-        this.enviar.id_user = this.user.id_usuario;
-        this.enviar.id = id;
-        this.enviar.nombre_user= this.user.user;
-        this.entradalineaService.deleteEntLinea(JSON.stringify(this.enviar))
-          .subscribe(
-            res=>{
-              
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+        if(value==='confirmar'){
+          this.enviar.id_user = this.user.id_usuario;
+          this.enviar.id = id;
+          this.enviar.nombre_user= this.user.user;
+          this.entradalineaService.deleteEntLinea(JSON.stringify(this.enviar))
+            .subscribe(
+              res=>{
+                swal('Perfecto','La entrada de linea fue borrada con exito','success');
+                this.getList();
+              },
+              err=>console.error(err)
+            );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
         
       });
     

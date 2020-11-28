@@ -13,7 +13,10 @@ export class ProveedorService {
   }
 
   getOneProv(id:number | string){
-    return this.http.get(`${this.API_URL}/proveedor/${id}`);
+    return this.http.get(`${this.API_URL}/proveedor/getone/${id}`);
+  }
+  getProveedores(){
+    return this.http.get(`${this.API_URL}/proveedor/proveedor`);
   }
 
   createProv(dep: Proveedor){

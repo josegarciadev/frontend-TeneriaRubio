@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let entLinea of query'>
+                            <tr *ngFor='let entLinea of query | paginate: { itemsPerPage: 5, currentPage:page ,id:"entlinea"}'>
                                 <td>{{entLinea.nro_orden}}</td>
                                 <td>{{entLinea.nombre_linea}}</td>
                                 <td>{{entLinea.nombre_producto+' | '+entLinea.nombre_proveedor}} </td>
@@ -36,6 +36,9 @@
                             
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="page = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="entlinea"></pagination-controls>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductoService} from '../../services/services.index';
 import {Router} from '@angular/router';
 import * as printJS from 'print-js';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -12,6 +13,7 @@ export class ProductoComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private productoServices: ProductoService, private router: Router) { 
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
   }
@@ -32,14 +34,35 @@ export class ProductoComponent implements OnInit {
   }
 
   deleteProd(id:number | string){
-    this.productoServices.deleteProd(id)
-          .subscribe(
-            res=>{
-              console.log(res);
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar el producto?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+      .then((value) => {
+        if(value==='confirmar'){
+          this.productoServices.deleteProd(id)
+              .subscribe(
+                res=>{
+                  swal('Perfecto','El producto fue eliminado con exito','success');
+                  this.getList();
+                },
+                err=>console.error(err)
+              );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
+      });
+    
   }
 
   generatePDF(){

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductoService} from '../../../services/services.index';
-import {Producto} from '../../../Models/producto';
 import {Router,ActivatedRoute}  from '@angular/router';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-agg-producto',
   templateUrl: './agg-producto.component.html',
@@ -10,12 +10,7 @@ import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 })
 export class AggProductoComponent implements OnInit {
   public formProd: FormGroup;
-  public producto:Producto={
-    id_producto: 0,
-    codigo_producto:'',
-    nombre_producto:'',
-    unidad_medida:''
-  }
+  
   public estado: boolean=false;
   public params;
   constructor(private productoServices: ProductoService, private router:Router,
@@ -53,13 +48,35 @@ export class AggProductoComponent implements OnInit {
   
     saveDep(producto){
      
-      this.productoServices.createProd(producto)
-      .subscribe(
-        res=>{
-          this.router.navigate(['/productos']);
+      swal({
+        title:'Agregar',
+        text: '¿Seguro de agregar el producto?',
+        icon:'warning',
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+        buttons: {
+          cancelar: {text:'Cancelar',className:'sweet-warning'},
+          confirmar: {text:'Confirmar',className:'sweet-success'},
         },
-        err=> console.error(err)
-      );
+      })
+        .then((value) => {
+          if(value==='confirmar'){
+            this.productoServices.createProd(producto)
+              .subscribe(
+                res=>{
+                  swal('Perfecto','El producto fue agregado con exito','success');
+                  this.router.navigate(['/productos']);
+                },
+                err=> console.error(err)
+              );
+          }
+          if(value==='cancelar'){
+            swal.close();
+          }
+          
+        });
+
+      
       
     }
   
@@ -75,13 +92,35 @@ export class AggProductoComponent implements OnInit {
     }
   
     updateDep(producto){
-      this.productoServices.updateProd(this.params,producto)
-        .subscribe(
-          res =>{
-            this.router.navigate(['/productos']);
-          },
-          err=> console.error(err)
-        );
+
+      swal({
+        title:'Actualizar',
+        text: '¿Seguro de actualizar el producto?',
+        icon:'warning',
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+        buttons: {
+          cancelar: {text:'Cancelar',className:'sweet-warning'},
+          confirmar: {text:'Confirmar',className:'sweet-success'},
+        },
+      })
+        .then((value) => {
+          if(value==='confirmar'){
+            this.productoServices.updateProd(this.params,producto)
+              .subscribe(
+                res =>{
+                  swal('Perfecto','El producto fue actualizado con exito','success');
+                  this.router.navigate(['/productos']);
+                },
+                err=> console.error(err)
+              );
+          }
+          if(value==='cancelar'){
+            swal.close();
+          }
+          
+        });
+      
     }
   
 

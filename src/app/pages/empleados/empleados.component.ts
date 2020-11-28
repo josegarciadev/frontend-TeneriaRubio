@@ -32,6 +32,7 @@ export class EmpleadosComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   public hora= moment(new Date()).format("YYYY-MM-DD HH:mm:ss"); 
   public user:any = JSON.parse(sessionStorage.getItem('user'));
   constructor(private empleadosServices: EmpleadosService) {
@@ -86,20 +87,35 @@ export class EmpleadosComponent implements OnInit {
 
 
   deleteEmp(id:number | string){
-    swal("Eliminar","¿Esta seguro de eliminar la entrada de linea?",'warning')
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar el empleado?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
       .then((value) => {
-        this.enviar.id_user = this.user.id_usuario;
-        this.enviar.id = id;
-        this.enviar.nombre_user= this.user.user;
-        console.log(this.enviar);
-        this.empleadosServices.deleteEmp(JSON.stringify(this.enviar))
-          .subscribe(
-            res=>{
-              
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+        if(value==='confirmar'){
+          this.enviar.id_user = this.user.id_usuario;
+          this.enviar.id = id;
+          this.enviar.nombre_user= this.user.user;
+          this.empleadosServices.deleteEmp(JSON.stringify(this.enviar))
+            .subscribe(
+              res=>{
+                swal('Perfecto','El empleado fue eliminado con exito','success');
+                this.getList();
+              },
+              err=>console.error(err)
+            );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
         
       });
     

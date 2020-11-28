@@ -17,6 +17,7 @@ export class DepartamentosComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private departamentosServices: DepartamentosService, private router: Router) { 
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
   }
@@ -38,17 +39,32 @@ export class DepartamentosComponent implements OnInit {
   }
 
   deleteDep(id:number | string){
-    swal("Eliminar","¿Esta seguro de eliminar el Departamento?",'warning')
-      .then((value) => {
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de Eliminar el departamento?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    }).then((value) => {
+      if(value==='confirmar'){
         this.departamentosServices.deleteDep(id)
-          .subscribe(
-            res=>{
-              console.log(res);
-              swal('El departamento fue eliminado con exito!');
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+        .subscribe(
+          res=>{
+            console.log(res);
+            swal('El departamento fue eliminado con exito!');
+            this.getList();
+          },
+          err=>console.error(err)
+        );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+        
         
       });
     

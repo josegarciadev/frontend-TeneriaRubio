@@ -18,6 +18,7 @@ export class SalidaLineaComponent implements OnInit {
   public user:any ;
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private salidalineaService:SalidalineaService, private router: Router) { 
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
   }

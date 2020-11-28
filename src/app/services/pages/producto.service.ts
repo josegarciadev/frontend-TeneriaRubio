@@ -13,7 +13,10 @@ export class ProductoService {
   }
 
   getOneProd(id:number | string){
-    return this.http.get(`${this.API_URL}/productos/${id}`);
+    return this.http.get(`${this.API_URL}/productos/getone/${id}`);
+  }
+  getProductos(){
+    return this.http.get(`${this.API_URL}/productos/producto`);
   }
 
   createProd(prod: Producto){

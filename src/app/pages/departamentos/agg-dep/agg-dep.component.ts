@@ -52,18 +52,34 @@ export class AggDepComponent implements OnInit {
   }
   saveDep(departamento){
     
-    swal("¿Esta seguro de crear el departamento?")
+    swal({
+      title:'Agregar',
+      text: '¿Seguro de agregar el departamento?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
     .then((value) => {
-      this.departamentoServices.createDep(departamento)
-      .subscribe(
-        res=>{ 
-          swal('Departamento creado con exito!');
-          
-          this.router.navigate(['/departamentos']);
-        },
-        err=> console.error(err)
-      );
-     
+      if(value=== 'confirmar'){
+        this.departamentoServices.createDep(departamento)
+        .subscribe(
+          res=>{ 
+            swal('Departamento creado con exito!');
+            
+            this.router.navigate(['/departamentos']);
+          },
+          err=> console.error(err)
+        );
+      }
+      if(value === 'cancelar'){
+        swal.close();
+      }
+    
+      
     });
         
   }
@@ -83,16 +99,31 @@ export class AggDepComponent implements OnInit {
 
   updateDep(departamento){
 
-     swal("Actualizar",`¿Esta seguro de actualizar? \n \n Departamento: ${departamento.nombre_departamento} \n Descripcion: ${departamento.descripcion_dep}`, 'warning')
+    swal({
+      title:'Actualizar',
+      text: '¿Seguro de actualizar el departamento?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
      .then((value) => {
-       this.departamentoServices.updateDep(this.params,departamento)
-       .subscribe(
-         res =>{
-           swal('Perfecto','El departamento fue actualizado con exito','success');
-           this.router.navigate(['/departamentos']);
-         },
-         err=> console.error(err)
-      );
+       if(value === 'confirmar'){
+          this.departamentoServices.updateDep(this.params,departamento)
+          .subscribe(
+            res =>{
+              swal('Perfecto','El departamento fue actualizado con exito','success');
+              this.router.navigate(['/departamentos']);
+            },
+            err=> console.error(err)
+          );
+        }
+        if(value==='cancerlar'){
+          swal.close();
+        }
       
      });
     

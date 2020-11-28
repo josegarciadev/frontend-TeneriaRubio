@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let emp of query'>
+                            <tr *ngFor='let emp of query | paginate: { itemsPerPage: 5, currentPage:page ,id:"entemp"}'>
                                 <td>{{emp.id_entrada}}</td>
                                 <td>{{emp.cedula}}</td>
                                 <td>{{emp.nombres}}</td>
@@ -36,6 +36,9 @@
                             
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="page = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="entemp"></pagination-controls>
                 </div>
             </div>
         </div>

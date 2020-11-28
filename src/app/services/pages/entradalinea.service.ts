@@ -14,7 +14,10 @@ export class EntradalineaService {
   }
 
   getOneEntLinea(id:number | string){
-    return this.http.get(`${this.API_URL}/entLinea/${id}`);
+    return this.http.get(`${this.API_URL}/entLinea/getone/${id}`);
+  }
+  getEntrada(){
+    return this.http.get(`${this.API_URL}/entLinea/entradas`);
   }
   getLinea(id:number | string){
     return this.http.get(`${this.API_URL}/entLinea/linea/${id}`);

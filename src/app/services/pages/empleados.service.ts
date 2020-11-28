@@ -14,7 +14,10 @@ export class EmpleadosService {
   }
 
   getOneEmp(id:number | string){
-    return this.http.get(`${this.API_URL}/emp/${id}`);
+    return this.http.get(`${this.API_URL}/emp/getone/${id}`);
+  }
+  getEmpleado(){
+    return this.http.get(`${this.API_URL}/emp/empleado`);
   }
 
   createEmp(emp: Empleados){

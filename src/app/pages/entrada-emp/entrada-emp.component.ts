@@ -16,6 +16,7 @@ export class EntradaEmpComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   public user:any = JSON.parse(sessionStorage.getItem('user'));
   constructor(private entradaempleadosService: EntradaempleadosService) { 
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
@@ -36,20 +37,36 @@ export class EntradaEmpComponent implements OnInit {
   }
 
   deleteEmp(id:number | string){
-    swal("Eliminar","¿Esta seguro de eliminar la entrada de linea?",'warning')
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar la entrada del empleado?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
       .then((value) => {
-        this.enviar.id_user = this.user.id_usuario;
-        this.enviar.id = id;
-        this.enviar.nombre_user= this.user.user;
-        console.log(this.enviar);
-        this.entradaempleadosService.deleteEntEmp(JSON.stringify(this.enviar))
-          .subscribe(
-            res=>{
-              
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+        if(value==='confirmar'){
+          this.enviar.id_user = this.user.id_usuario;
+          this.enviar.id = id;
+          this.enviar.nombre_user= this.user.user;
+          console.log(this.enviar);
+          this.entradaempleadosService.deleteEntEmp(JSON.stringify(this.enviar))
+            .subscribe(
+              res=>{
+                swal('Perfecto','La entrad de empleado fue borrada con exito','success');
+                this.getList();
+              },
+              err=>console.error(err)
+            );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
         
       });
     

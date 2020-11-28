@@ -14,7 +14,10 @@ export class SalidalineaService {
   }
 
   getOneSalLinea(id:number | string){
-    return this.http.get(`${this.API_URL}/salLinea/${id}`);
+    return this.http.get(`${this.API_URL}/salLinea/getone/${id}`);
+  }
+  getSalidas(){
+    return this.http.get(`${this.API_URL}/salLinea/salidas`);
   }
   getLinea(id:number | string){
     return this.http.get(`${this.API_URL}/salLinea/linea/${id}`);

@@ -22,12 +22,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let user of query'>
+                            <tr *ngFor='let user of query | paginate: { itemsPerPage: 5, currentPage:page ,id:"user"}'>
                                 <td>{{user.id_usuario}}</td>
                                 <td>{{user.cedula}}</td>
                                 <td>{{user.nombre +' '+user.apellido }}</td>
                                 <td>{{user.status}}</td>
-                                <td><a class="pointer" ><img src="/assets/images/detalles.jpg"></a></td>
+                                <td><a class="pointer" (click)='getOne(user.id_usuario)'><img src="/assets/images/detalles.jpg"></a></td>
                                 <td><a class="pointer" routerLink="/editUsuarios/{{user.id_usuario}}" ><img src="./assets/images/editar.png"></a></td>
                                 <td><a class="pointer" (click)='deleteUser(user.id_usuario)' ><img src="/assets//images/borrar.png"></a></td>
                                 
@@ -35,6 +35,9 @@
                             
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="page = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="user"></pagination-controls>
                 </div>
             </div>
         </div>

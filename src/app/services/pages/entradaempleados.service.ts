@@ -14,7 +14,10 @@ export class EntradaempleadosService {
   }
 
   getOneEntEmp(id:number | string){
-    return this.http.get(`${this.API_URL}/entEmp/${id}`);
+    return this.http.get(`${this.API_URL}/entEmp/getone/${id}`);
+  }
+  getEntrada(){
+    return this.http.get(`${this.API_URL}/entEmp/entradas`);
   }
 
   createEntEmp(emp: EntradaEmpleado){

@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let lineaprod of query'>
+                            <tr *ngFor='let lineaprod of query | paginate: { itemsPerPage: 5, currentPage:page ,id:"lineaprod"}'>
                                 <td>{{lineaprod.id_lineaprod}}</td>
                                 <td>{{lineaprod.nombre_linea}}</td>
                                 <td>{{lineaprod.nombre_producto+' | '+lineaprod.nombre_proveedor}} </td>
@@ -32,6 +32,9 @@
                             
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="page = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="lineaprod"></pagination-controls>
                 </div>
             </div>
         </div>

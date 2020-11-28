@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DepartamentosService} from '../../../services/services.index';
 import {LineaService} from '../../../services/services.index';
-import {Linea} from '../../../Models/linea';
+import swal from 'sweetalert';
 import {Router,ActivatedRoute}  from '@angular/router';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 @Component({
@@ -59,16 +59,35 @@ export class AggLineaComponent implements OnInit {
   }
 
   saveLinea(linea){
-  
-
-    this.lineaService.createLinea(linea)
-    .subscribe(
-      res=>{
-        this.router.navigate(['/linea']);
+    swal({
+      title:'Agregar',
+      text: '¿Seguro de agregar la linea?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
       },
-      err=> console.error(err)
-    );
-    
+    })
+    .then((value) => {
+      if(value==='confirmar'){
+        this.lineaService.createLinea(linea)
+          .subscribe(
+            res=>{
+              this.router.navigate(['/linea']);
+              swal('Perfecto','La linea fue agregada con exito','success');
+            },
+            err=> console.error(err)
+          );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
+     
+    });
+
   }
 
   getOne(id:number | string){
@@ -83,15 +102,37 @@ export class AggLineaComponent implements OnInit {
   }
 
   updateLinea(linea){
-   
+    swal({
+      title:'Actulizar',
+      text: '¿Seguro de actualizar la linea?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+    .then((value) => {
+      if(value==='confirmar'){
+        this.lineaService.updateLinea(this.params, linea)
+          .subscribe(
+            res =>{
+              
+              this.router.navigate(['/linea']);
+              swal('Perfecto','La linea fue actualizada con exito','success');
+            },
+            err=> console.error(err)
+          );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
+     
+    });
 
-    this.lineaService.updateLinea(this.params, linea)
-      .subscribe(
-        res =>{
-          this.router.navigate(['/linea']);
-        },
-        err=> console.error(err)
-      );
+    
   }
 
 

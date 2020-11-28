@@ -51,19 +51,34 @@ cancelar(){
   this.router.navigate(['/entradaEmpleado']);
 }
 saveEntEmp(entrada){
-  swal("¿Esta seguro de crear la entrada de empleados?")
+  swal({
+    title:'Agregar',
+    text: '¿Seguro de agregar la entrada del empleado?',
+    icon:'warning',
+    closeOnClickOutside: false,
+    closeOnEsc: false,
+    buttons: {
+      cancelar: {text:'Cancelar',className:'sweet-warning'},
+      confirmar: {text:'Confirmar',className:'sweet-success'},
+    },
+  })
   .then((value) => {
-  
-    entrada.id_user = this.user.id_usuario;
-    entrada.nombre_user= this.user.user;
-    this.entradaempleadosService.createEntEmp(entrada)
-    .subscribe(
-      res=>{ 
-        swal('Empleado creado con exito!');
-        this.router.navigate(['/entradaEmpleado']);
-      },
-      err=> console.error(err)
-    );
+    if(value==='confirmar'){
+      entrada.id_user = this.user.id_usuario;
+      entrada.nombre_user= this.user.user;
+      this.entradaempleadosService.createEntEmp(entrada)
+      .subscribe(
+        res=>{ 
+          swal('Empleado creado con exito!');
+          this.router.navigate(['/entradaEmpleado']);
+        },
+        err=> console.error(err)
+      );
+    }
+    if(value==='cancelar'){
+      swal.close();
+    }
+    
    
   });
       
@@ -92,21 +107,36 @@ getOne(id:number | string){
 
 updateEntEmp(entrada){
 
-  swal("Actualizar",'¿Esta seguro de actualizar?', 'warning')
+  swal({
+    title:'Actualizar',
+    text: '¿Seguro de actualizar la entrada del empleado?',
+    icon:'warning',
+    closeOnClickOutside: false,
+    closeOnEsc: false,
+    buttons: {
+      cancelar: {text:'Cancelar',className:'sweet-warning'},
+      confirmar: {text:'Confirmar',className:'sweet-success'},
+    },
+  })
     .then((value) => {
-     
+     if(value==='confirmar'){
+        entrada.id_user = this.user.id_usuario;
+        entrada.nombre_user = this.user.user;
+    
+        this.entradaempleadosService.updateEntEmp(this.params, entrada)
+                .subscribe(
+                  res =>{
+                  swal('Perfecto','La Entrada del empleado fue actualizado con exito','success');
+                  this.router.navigate(['/entradaEmpleado']);
+                  console.log(res);},
+                err=> console.error(err)
+      );
+     }
+     if(value==='cancelar'){
+       swal.close();
+     }
       
-      entrada.id_user = this.user.id_usuario;
-      entrada.nombre_user = this.user.user;
-  
-      this.entradaempleadosService.updateEntEmp(this.params, entrada)
-              .subscribe(
-                res =>{
-                swal('Perfecto','La Entrada del empleado fue actualizado con exito','success');
-                this.router.navigate(['/entradaEmpleado']);
-                console.log(res);},
-               err=> console.error(err)
-    );
+      
     });
   }
 

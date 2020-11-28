@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProveedorService} from '../../../services/services.index';
-import {Proveedor} from '../../../Models/proveedor';
+import swal from 'sweetalert';
 import {Router,ActivatedRoute}  from '@angular/router';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 @Component({
@@ -10,11 +10,7 @@ import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 })
 export class AggProveedorComponent implements OnInit {
   public formProv: FormGroup;
-  public proveedor:Proveedor={
-    id_proveedor: 0,
-    nombre_proveedor:'',
-    descripcion_prov:''
-  }
+ 
   public estado: boolean=false;
   public params;
   constructor(private proveedorServices: ProveedorService, private router:Router,
@@ -48,15 +44,33 @@ export class AggProveedorComponent implements OnInit {
     this.router.navigate(['/proveedor'])
   }
   saveProv(prov){
-   
-    this.proveedorServices.createProv(prov)
-    .subscribe(
-      res=>{
-        this.router.navigate(['/proveedor']);
+    swal({
+      title:'Agregar',
+      text: '¿Seguro de agregar el proveedor?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
       },
-      err=> console.error(err)
-    );
-    
+    })
+      .then((value) => {
+        if(value==='confirmar'){
+          this.proveedorServices.createProv(prov)
+          .subscribe(
+            res=>{
+              swal('Perfecto','El proveedor fue agregado con exito','success');
+              this.router.navigate(['/proveedor']);
+            },
+            err=> console.error(err)
+          );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
+      });
   }
 
   getOne(id:number | string){
@@ -71,13 +85,36 @@ export class AggProveedorComponent implements OnInit {
   }
 
   updateProv(prov){
-    this.proveedorServices.updateProv(this.params, prov)
-      .subscribe(
-        res =>{
-          this.router.navigate(['/proveedor']);
-        },
-        err=> console.error(err)
-      );
+
+    swal({
+      title:'Actualizar',
+      text: '¿Seguro de actualizar el proveedor?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+      .then((value) => {
+        if(value==='confirmar'){
+          this.proveedorServices.updateProv(this.params, prov)
+          .subscribe(
+            res =>{
+              swal('Perfecto','El proveedor fue actualizado con exito','success');
+              this.router.navigate(['/proveedor']);
+            },
+            err=> console.error(err)
+          );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
+      });
+
+    
   }
 
 }

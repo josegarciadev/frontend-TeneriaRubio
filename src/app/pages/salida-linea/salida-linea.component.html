@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let salLinea of query'>
+                            <tr *ngFor='let salLinea of query | paginate: { itemsPerPage: 5, currentPage:page ,id:"salLinea"}'>
                                 <td>{{salLinea.nro_orden}}</td>
                                 <td>{{salLinea.nombre_linea}}</td>
                                 <td>{{salLinea.nombre_producto+' | '+salLinea.nombre_proveedor}} </td>
@@ -38,6 +38,9 @@
                             
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="page = $event" responsive="true"
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" id="salLinea"></pagination-controls>
                 </div>
             </div>
         </div>

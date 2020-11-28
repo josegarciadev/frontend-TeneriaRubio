@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProdproveeService} from '../../services/services.index';
 import {Router} from '@angular/router';
 import * as printJS from 'print-js';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-prodprov',
   templateUrl: './prodprov.component.html',
@@ -12,6 +13,7 @@ export class ProdprovComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page:number=1;
   constructor(private prodprovServices: ProdproveeService, private router: Router) { 
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
   }
@@ -32,14 +34,35 @@ export class ProdprovComponent implements OnInit {
   }
 
   deleteProdprov(id:number | string){
-    this.prodprovServices.deleteProdprov(id)
-          .subscribe(
-            res=>{
-              
-              this.getList();
-            },
-            err=>console.error(err)
-          );
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar el producto proveedor?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+      .then((value) => {
+        if(value==='confirmar'){
+          this.prodprovServices.deleteProdprov(id)
+              .subscribe(
+                res=>{
+                  swal('Perfecto','El producto proveedor fue eliminado con exito','success');
+                  this.getList();
+                },
+                err=>console.error(err)
+              );
+        }
+        if(value==='cancelar'){
+          swal.close();
+        }
+        
+      });
+
+    
   }
   generatePDF(){
     console.log(this.someJSONdata);

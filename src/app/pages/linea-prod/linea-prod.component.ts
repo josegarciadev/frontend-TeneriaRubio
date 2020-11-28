@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LineaProdService} from '../../services/services.index';
 import {Router} from '@angular/router';
 import * as printJS from 'print-js';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-linea-prod',
   templateUrl: './linea-prod.component.html',
@@ -12,6 +13,7 @@ export class LineaProdComponent implements OnInit {
   public someJSONdata:any=[];
   public date= new Date();
   public fecha ;
+  public page: number=1;
   constructor(private lineaProdService:LineaProdService, private router: Router) {
     this.fecha=(this.date.getDate() + "/" + (this.date.getMonth() +1) + "/" + this.date.getFullYear());
    }
@@ -32,7 +34,20 @@ export class LineaProdComponent implements OnInit {
   }
 
   deleteLineaprod(id:number | string){
-    this.lineaProdService.deleteLineaProd(id)
+    swal({
+      title:'Eliminar',
+      text: '¿Seguro de eliminar la linea Producto?',
+      icon:'warning',
+      closeOnClickOutside: false,
+      closeOnEsc: false,
+      buttons: {
+        cancelar: {text:'Cancelar',className:'sweet-warning'},
+        confirmar: {text:'Confirmar',className:'sweet-success'},
+      },
+    })
+    .then((value) => {
+      if(value==='confirmar'){
+        this.lineaProdService.deleteLineaProd(id)
           .subscribe(
             res=>{
               
@@ -40,6 +55,14 @@ export class LineaProdComponent implements OnInit {
             },
             err=>console.error(err)
           );
+      }
+      if(value==='cancelar'){
+        swal.close();
+      }
+      
+     
+    });
+    
   }
   generatePDF(){
     
